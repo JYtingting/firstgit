@@ -1,0 +1,256 @@
+{
+  "data": [
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "",
+        "id": 59,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "新手小白",
+        "sortNo": 1,
+        "templateType": 1,
+        "updatedAt": "2019-06-25 19:00:44",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=954",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/185844_46_psjy.jpg",
+          "mvId": 59,
+          "title": "全球自选app",
+          "titleDesc": "快速玩转了解全球自选！"
+        },
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=934",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/190011_35_i6jz.jpg",
+          "mvId": 59,
+          "title": "新手小白",
+          "titleDesc": "快速学习开启第一单"
+        }
+      ]
+    },
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "goodsDetail.html?id=932",
+        "id": 57,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "印象塑造",
+        "sortNo": 2,
+        "templateType": 2,
+        "updatedAt": "2019-06-26 11:03:47",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "已经有5人学习",
+          "desc2": "1讲|2课",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=932",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/173116_33_0ywi.jpg",
+          "mvId": 57,
+          "title": "如何塑造第一印象",
+          "titleDesc": "头像和昵称"
+        },
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "已经有5人学习",
+          "desc2": "1讲|2课",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=932",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/173125_7_uxb4.jpg",
+          "mvId": 57,
+          "title": "如何塑造第一印象",
+          "titleDesc": "背景和签名"
+        }
+      ]
+    },
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "goodsDetail.html?id=945",
+        "id": 61,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "社群",
+        "sortNo": 3,
+        "templateType": 2,
+        "updatedAt": "2019-06-26 16:30:03",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "已有6人学习",
+          "desc2": "1讲|1课",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=945",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/183205_16_upzl.jpg",
+          "mvId": 61,
+          "title": "如何搭建社群",
+          "titleDesc": "搭建属于自己的种草群"
+        }
+      ]
+    },
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "goodsDetail.html?id=935",
+        "id": 60,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "沟通技巧",
+        "sortNo": 4,
+        "templateType": 5,
+        "updatedAt": "2019-06-26 11:51:40",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=935",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/182830_91_gjq9.jpg",
+          "mvId": 60,
+          "title": "一对一沟通技巧",
+          "titleDesc": "快速了解一对一沟通技巧，掌握让人快速理解的课程！"
+        }
+      ]
+    },
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "goodsDetail.html?id=933",
+        "id": 58,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "地推",
+        "sortNo": 5,
+        "templateType": 3,
+        "updatedAt": "2019-06-26 11:14:51",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=933",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/175825_36_3wgi.jpeg",
+          "mvId": 58,
+          "title": "前期准备工作",
+          "titleDesc": ""
+        },
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=933",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/175858_55_w1kn.jpeg",
+          "mvId": 58,
+          "title": "操作实施4大方法",
+          "titleDesc": ""
+        },
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=933",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/175903_96_fd9m.jpeg",
+          "mvId": 58,
+          "title": "后期如何维护",
+          "titleDesc": ""
+        }
+      ]
+    },
+    {
+      "moduleView": {
+        "createdAt": "2019-04-30 14:26:35",
+        "deleted": false,
+        "description": "查看全部",
+        "hrefUrl": "goodsDetail.html?id=951",
+        "id": 62,
+        "isShow": true,
+        "mid": 1,
+        "moduleName": "线下沙龙",
+        "sortNo": 6,
+        "templateType": 5,
+        "updatedAt": "2019-06-26 15:16:16",
+        "updatedCellphone": "18758930415",
+        "version": 0,
+        "vid": 7
+      },
+      "moduleViewInfoList": [
+        {
+          "buttonDesc": "",
+          "courseAudioVoList": [],
+          "courseType": 0,
+          "desc1": "",
+          "desc2": "",
+          "goodsId": 0,
+          "hrefUrl": "goodsDetail.html?id=951",
+          "imageUrl": "https://img.mall.xc2018.com.cn/mall/upload/20190625/184157_17_reum.jpg",
+          "mvId": 62,
+          "title": "如何做好线下沙龙",
+          "titleDesc": "快速了解如何办好线下沙龙课程！"
+        }
+      ]
+    }
+  ],
+  "errmsg": "success",
+  "errno": 0
+}

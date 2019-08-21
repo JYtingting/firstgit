@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>历史排行</title>
+  <link rel="stylesheet" href="ranking-history.css">
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize () {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="item-list"></div>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/ua.js"></script>
+<script src="../js/moment.min.js"></script>
+<script type="text/javascript">
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  let baseUrl = ''
+  getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+  getUserInfo()
+  if (browser.versions.ios) {
+    $('.item-list').css('padding-top', `1rem`)
+  }
+  getStatusBar()
+  // 获取Android顶部高度
+  function getStatusBar (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getStatusBar', {}, function (response) {
+        const val = response / 100 + 0.25
+        if (browser.versions.ios) {
+          $('.item-list').css('margin-top', `${val}rem`)
+        }
+      })
+    } else {
+      setTimeout(() => {
+        getStatusBar()
+      }, 50)
+    }
+  }
+
+
+
+  // const token = 'c1a0b35ad0854986b2f81b5cf614709'
+  // const level = 10
+  // $.ajax({
+  //   type: 'post',
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   },
+  //   url: `${baseUrl}/doc/api/common/auth/memberSales/getHistoryItemSales.json?token=${token}`,
+  //   success: (res) => {
+  //     const data = res.data
+  //     let fir = ''
+  //     for (let i = 0; i < data.list.length; i++) {
+  //       fir += `<div class="item"><div class="info clearfix"><img src="${data.list[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><div class="detail"><div class="title one-txt-cut">${data.list[i].itemRankDTO.name}</div><div class="price clearfix"><div class="member">¥${level >= 10 ? priceFormat(data.list[i].itemRankDTO.memberPrice) : priceFormat(data.list[i].itemRankDTO.marketPrice)}</div><div class="market">市场价¥${level >= 10 ? priceFormat(data.list[i].itemRankDTO.marketPrice) : priceFormat(data.list[i].itemRankDTO.showPrice)}</div></div></div></div><div class="date clearfix"><div class="limit">活动时间：${moment(data.list[i].itemRankDTO.startDate).format('YYYY-MM-DD')}至${moment(data.list[i].itemRankDTO.endDate).format('YYYY-MM-DD')}</div><a href="javascript:void(0)" onclick="seeMore(${data.list[i].itemRankDTO.activityId})"><div class="more">查看排行＞</div></a></div></div>`
+  //     }
+  //     $('.item-list').append(fir)
+  //   }
+  // })
+
+
+
+  function getUserInfo (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        const token = JSON.parse(response).token
+        const level = JSON.parse(response).level
+        $.ajax({
+          type: 'post',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          url: `${baseUrl}/doc/api/common/auth/memberSales/getHistoryItemSales.json?token=${token}`,
+          success: (res) => {
+            const data = res.data
+            let fir = ''
+            for (let i = 0; i < data.list.length; i++) {
+              fir += `<div class="item"><div class="info clearfix"><img src="${data.list[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><div class="detail"><div class="title one-txt-cut">${data.list[i].itemRankDTO.name}</div><div class="price clearfix"><div class="member">¥${level >= 10 ? priceFormat(data.list[i].itemRankDTO.memberPrice) : priceFormat(data.list[i].itemRankDTO.marketPrice)}</div><div class="market">市场价¥${level >= 10 ? priceFormat(data.list[i].itemRankDTO.marketPrice) : priceFormat(data.list[i].itemRankDTO.showPrice)}</div></div></div></div><div class="date clearfix"><div class="limit">活动时间：${moment(data.list[i].itemRankDTO.startDate).format('YYYY-MM-DD')}至${moment(data.list[i].itemRankDTO.endDate).format('YYYY-MM-DD')}</div><a href="javascript:void(0)" onclick="seeMore(${data.list[i].itemRankDTO.activityId})"><div class="more">查看排行＞</div></a></div></div>`
+            }
+            $('.item-list').append(fir)
+          }
+        })
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo()
+      }, 50)
+    }
+  }
+  function seeMore (id) {
+    getQueryString('dev') ? window.location.href = `./rankingHistoryDetail.html?activityId=${id}&dev=1&fullscreen=1` : window.location.href = `./rankingHistoryDetail.html?activityId=${id}&fullscreen=1`
+  }
+</script>
+</body>
+</html>

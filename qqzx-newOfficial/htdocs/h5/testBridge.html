@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test iOS6</title>
+  <div style="width:200px;height: 50px;line-height: 50px;border:1px solid #fafafa;" class="getTicket">getTicket</div>
+  <div style="width:200px;height: 50px;line-height: 50px;border:1px solid #fafafa;" class="getUrlTo">getUrlTo</div>
+  <div style="width:200px;height: 50px;line-height: 50px;border:1px solid #fafafa;" class="getUserInfo">getUserInfo</div>
+</head>
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<body>
+<script>
+  alert(navigator.userAgent)
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  function getTicket (id){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getTicket', {'id': `${id}`}, function (response) {
+        alert(response)
+      })
+    } else {
+      setTimeout(() => {
+        getTicket()
+      }, 50)
+    }
+  }
+  function getUrlTo (index){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUrlTo', {'page': `wg://push.chuang.co?page=prodDetail&prodId=${index}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        getUrlTo()
+      }, 50)
+    }
+  }
+  function getUserInfo (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        alert(response)
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo()
+      }, 50)
+    }
+  }
+  $('.getTicket').click(() => {
+    getTicket(15)
+  })
+  $('.getUrlTo').click(() => {
+    getUrlTo('5162')
+  })
+  $('.getUserInfo').click(() => {
+    getUserInfo()
+  })
+</script>
+</body>
+</html>

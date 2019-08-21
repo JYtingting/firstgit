@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="copyright" content="全球自选 版权所有" />
+    <meta name="author" content="全球自选" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="newOfficial/js/jquery.js"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
+    <link rel="stylesheet" href="newOfficial/CSS/normalCSS.css">
+    <link rel="stylesheet" href="newOfficial/CSS/recruitment.css">
+    <title>全球自选 - 社交电商新零售创业平台【官方网站】</title>
+</head>
+<body>
+<!--侧边工具栏-->
+<div class="side-menu-container"></div>
+<div class="nav">
+    <div class="nav-2">
+        <img src="https://file.wchoosemall.com/platform/manager/pic/20190614/14605770643972654.png" class="logo2" alt="全球自选官网">
+        <ul class="links">
+            <li><a class="nav-recruit" href="index.html" style="color:rgba(212,32,24,1);" rel="nofollow">首页</a></li>
+            <li><a class="nav-home" href="recruitment.html">全球自选介绍</a></li>
+            <!--<li><a class="nav-download" href="app.html">APP下载</a></li>-->
+            <li><a class="nav-consultation" href="news.html">资讯</a></li>
+            <li><a class="nav-help" href="help.html">帮助中心</a></li>
+            <li><a class="nav-about" href="about.html">关于我们</a></li>
+        </ul>
+    </div>
+</div>
+<div class="recruitment_wrapper">
+    <div class="ads">
+        <img src="https://file.wchoosemall.com/platform/manager/pic/20190626/15450014791781154.png" alt="">
+    </div>
+    <div class="conditions_wrapper">
+        <div class="conditions_one" id="job">
+            <div class="conditions_one_title">职位：</div>
+            <div class="conditions_one_body">
+                <div id="job1" onclick="searchJob(1)">全部</div>
+                <div id="job2" onclick="searchJob(2)">技术</div>
+                <div id="job3" onclick="searchJob(3)">设计</div>
+                <div id="job4" onclick="searchJob(4)">运营</div>
+            </div>
+        </div>
+        <div class="conditions_one" id="area">
+            <div class="conditions_one_title">区域：</div>
+            <div class="conditions_one_body">
+                <div id="area1" onclick="searchArea(1)">全部</div>
+                <div id="area2" onclick="searchArea(2)">西湖</div>
+                <div id="area3" onclick="searchArea(3)">上城</div>
+                <div id="area4" onclick="searchArea(4)">下城</div>
+                <div id="area5" onclick="searchArea(5)">拱墅</div>
+                <div id="area6" onclick="searchArea(6)">江干</div>
+                <div id="area7" onclick="searchArea(7)">滨江</div>
+                <div id="area8" onclick="searchArea(8)">余杭</div>
+            </div>
+        </div>
+        <!-- <div class="conditions_one">
+             <div class="conditions_one_title">年龄：</div>
+             <div class="conditions_one_body">
+                 <div>25-30岁</div>
+                 <div>30-40岁</div>
+                 <div>40岁以上</div>
+             </div>
+         </div>
+         !-->
+        <!--<div class="conditions_one">
+            <div class="conditions_one_title">性别：</div>
+            <div class="conditions_one_body">
+                <div>男</div>
+                <div>女</div>
+            </div>
+        </div>!-->
+        <div class="conditions_one" id="year">
+            <div class="conditions_one_title">工作年限：</div>
+            <div class="conditions_one_body">
+                <div id="year1" onclick="searchYear(1)">应届毕业生</div>
+                <div id="year2" onclick="searchYear(2)">3年及以下</div>
+                <div id="year3" onclick="searchYear(3)">3-5年</div>
+                <div id="year4" onclick="searchYear(4)">5-10年</div>
+                <div id="year5" onclick="searchYear(5)">10年以上</div>
+            </div>
+        </div>
+        <div class="conditions_one" id="degree">
+            <div class="conditions_one_title">学历：</div>
+            <div class="conditions_one_body">
+                <div id="degree1" onclick="searchDegree(1)">大专</div>
+                <div id="degree2" onclick="searchDegree(2)">本科</div>
+                <div id="degree3" onclick="searchDegree(3)">硕士</div>
+                <div id="degree4" onclick="searchDegree(4)">博士</div>
+                <div id="degree5" onclick="searchDegree(5)">不要求</div>
+            </div>
+        </div>
+        <div class="conditions_one" id="salary">
+            <div class="conditions_one_title">期望薪资：</div>
+            <div class="conditions_one_body">
+                <div id="salary1" onclick="searchSalary(1)">5k-10k</div>
+                <div id="salary2" onclick="searchSalary(2)">10k-15k</div>
+                <div id="salary3" onclick="searchSalary(3)">15k-25k</div>
+                <div id="salary4" onclick="searchSalary(4)">25k-50k</div>
+                <div id="salary5" onclick="searchSalary(5)">50k以上</div>
+            </div>
+        </div>
+    </div>
+    <div class="list_wrapper"></div>
+    <div class="modal_wrapper"></div>
+    <div class="modal_job">
+        <div class="modal_title">
+            <div class="modal_title_word">应聘岗位申请</div>
+        </div>
+        <div class="modal_center">应聘岗位</div>
+        <div class="modal_body">
+            <div class="item_des">
+                <span class="item_dot">*</span>
+                <span class="item_word">应聘岗位</span>
+            </div>
+            <input class="item_input" type="text" placeholder="请输入应聘岗位名称">
+        </div>
+        <div class="modal_body">
+            <div class="item_des">
+                <span class="item_dot">*</span>
+                <span class="item_word">薪资要求</span>
+            </div>
+            <input class="item_input" type="text" placeholder="请输入薪资要求">
+        </div>
+        <div class="modal_body">
+            <div class="item_des">
+                <span class="item_dot">*</span>
+                <span class="item_word">工作所在地</span>
+            </div>
+            <input class="item_input" type="text" placeholder="请输入工作所在地">
+        </div>
+        <div class="modal_body">
+            <div class="item_des">
+                <span class="item_dot">*</span>
+                <span class="item_word">手机号</span>
+            </div>
+            <input class="item_input" type="text" placeholder="请输入手机号">
+        </div>
+        <!--<div class="modal_body">-->
+        <!--<div class="item_des">-->
+        <!--<span class="item_dot">*</span>-->
+        <!--<span class="item_word">验证码</span>-->
+        <!--</div>-->
+
+        <!--<div class="code_wrapper">-->
+        <!--<input class="code_input" type="text" placeholder="请输入验证码">-->
+        <!--<div class="code_text">-->
+        <!--<div class="code_des">换一张</div>-->
+        <!--<div class="item_dot">*</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <div class="sub_wrapper">
+            <div class="sub" onclick="handleSub()">提交</div>
+            <div class="sub" onclick="cancelSub()">取消</div>
+        </div>
+    </div>
+</div>
+<div class="service-container">
+    <img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6483956472427301.png" alt="全球自选APP下载">
+    <div class="line"></div>
+    <div class="service-text">
+        <div class="service-hot-text"><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6484516087235727.png" width="23" height="22" alt="">客服热线</div>
+        <h3 class="phone-number-text">0571-8756-5212</h3>
+        <div class="service-time-text">服务时间（9:00-22:00）</div>
+        <div class="company-address-text">公司地址：浙江省杭州市富阳区银湖街道富闲路9号银湖创新中心5号楼2楼</div>
+    </div>
+</div>
+<div class="footer" style="margin-top: 0">
+    <div class="footer-container"  style="height: 84px">
+        <div class="footer-nav">
+            <a href="about.html">关于全球自选</a><div class="footer-line"></div>
+            <a>自选APP</a><div class="footer-line"></div>
+            <a href="news.html">资讯动态</a><div class="footer-line"></div>
+            <a href="help.html">常见问题</a>
+        </div>
+        <div style="white-space: nowrap; min-width: 508px">浙ICP备19001142号-1 © 2019-2010 杭州自选科技有限公司,All RIGHTS RESERVED.</div>
+        <div><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6487721395327899.png" alt=""><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6487721385694615.png" style="margin-left:14px" alt=""></div>
+    </div>
+</div>
+</body>
+<script src="newOfficial/js/js.js"></script>
+<script src="newOfficial/js/moment.min.js"></script>
+<script>
+    let jsonData = [];
+    function ajax_data() {
+        $.ajax({
+            url: "newOfficial/mock.json",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                mockData(data.data)
+            }
+        })
+    }
+    ajax_data(); //执行函数
+
+    // 获取本地json
+    function mockData(res) {
+        jsonData = res
+        const data = res
+        getCurData(data,'all')
+    }
+
+    // 筛选职位数据
+    function getCurData(data,curType) {
+        $('.list_item').remove()
+        const curData = []
+        for (let i = 0;i<data.length;i++) {
+            if (curType==='all') {
+                curData.push(data[i])
+                $('#year div').css('color','#333333')
+                $('#degree div').css('color','#333333')
+                $('#salary div').css('color','#333333')
+            }else{
+                if(data[i].jobType===curType){
+                    curData.push(data[i])
+                }
+            }
+        }
+        stitchingDom(curData)
+    }
+    // 筛选地址数据
+    function getLocation(data,curType) {
+        $('.list_item').remove()
+        const curData = []
+        for (let i = 0;i<data.length;i++) {
+            if (curType==='all') {
+                curData.push(data[i])
+            }else{
+                if(data[i].location===curType){
+                    curData.push(data[i])
+                    $('#year div').css('color','#333333')
+                    $('#degree div').css('color','#333333')
+                    $('#salary div').css('color','#333333')
+                }
+            }
+        }
+        stitchingDom(curData)
+    }
+    // 筛选工作年限数据
+    function getYear(data,curType) {
+        $('.list_item').remove()
+        const curData = []
+        for (let i = 0;i<data.length;i++) {
+            if (curType==='all') {
+                curData.push(data[i])
+            }else{
+                if(data[i].year===curType){
+                    curData.push(data[i])
+                }
+            }
+        }
+        stitchingDom(curData)
+    }
+    // 筛选学历数据
+    function getDegree(data,curType) {
+        $('.list_item').remove()
+        const curData = []
+        for (let i = 0;i<data.length;i++) {
+            if (curType==='all') {
+                curData.push(data[i])
+            }else{
+                if(data[i].degree===curType){
+                    curData.push(data[i])
+                }
+            }
+        }
+        stitchingDom(curData)
+    }
+    // 期望薪资
+    function getSalary(data,curType) {
+        $('.list_item').remove()
+        const curData = []
+        for (let i = 0;i<data.length;i++) {
+            if (curType==='all') {
+                curData.push(data[i])
+            }else{
+                if(data[i].salary===curType){
+                    curData.push(data[i])
+                }
+            }
+        }
+        stitchingDom(curData)
+    }
+    // 拼接Dom
+    function stitchingDom(data) {
+        let listContent = ''
+        for(let i = 0;i<data.length;i++){
+            listContent += '<div class="list_item">' +
+                '<div class="item_left">'+
+                '<div class="des_wrapper">'+
+                '<div class="item_job">'+data[i].job+'</div>'+
+                '<div class="item_salary">'+data[i].salary+'</div>'
+                +'</div>'+
+                '<div class="item_degree">'+data[i].location+'|'+data[i].year+'|'+data[i].degree+
+                '</div>'
+                +'</div>'
+                +'<div class="item_check">'+
+                '<span>'+data[i].checkNum+'人查看'+'</span>'+
+                '<span>'+data[i].communicationNum+'人沟通'+'</span>'+
+                '</div>'
+                +'<div class="item_date">'+data[i].date+'</div>'+
+                '<div class="item_request" onclick="request()">'+'立即申请'+'</div>'
+                +'</div>'
+        }
+        $('.list_wrapper').append(listContent)
+    }
+    // 申请职位
+    function request() {
+        $('.modal_job').css('display','block')
+        $('.modal_wrapper').css('display','block')
+    }
+    function handleSub() {
+        $('.modal_job').css('display','none')
+        $('.modal_wrapper').css('display','none')
+        swal("提交成功");
+    }
+    function cancelSub() {
+        $('.modal_job').css('display','none')
+        $('.modal_wrapper').css('display','none')
+    }
+    // 职位
+    function searchJob(i) {
+        $('#job div').css('color','#333333')
+        $('#job'+i).css('color','#F22036')
+        switch (i) {
+            case 1:
+                getCurData(jsonData,'all')
+                break
+            case 2:
+                getCurData(jsonData,'tech')
+                break
+            case 3:
+                getCurData(jsonData,'design')
+                break
+            case 4:
+                getCurData(jsonData,'operation')
+                break
+        }
+    }
+    // 区域
+
+    function searchArea(i) {
+        $('#area div').css('color','#333333')
+        $('#area'+i).css('color','#F22036')
+        switch (i) {
+            case 1:
+                getLocation(jsonData,'all')
+                break
+            case 2:
+                getLocation(jsonData,'西湖')
+                break
+            case 3:
+                getLocation(jsonData,'上城')
+                break
+            case 4:
+                getLocation(jsonData,'下城')
+                break
+            case 5:
+                getLocation(jsonData,'拱墅')
+                break
+            case 6:
+                getLocation(jsonData,'江干')
+                break
+            case 7:
+                getLocation(jsonData,'滨江')
+                break
+            case 8:
+                getLocation(jsonData,'余杭')
+                break
+        }
+    }
+    // 年限
+    function searchYear(i) {
+        $('#year div').css('color','#333333')
+        $('#year'+i).css('color','#F22036')
+        switch (i) {
+            case 1:
+                getYear(jsonData,'应届毕业生')
+                break
+            case 2:
+                getYear(jsonData,'3年及以下')
+                break
+            case 3:
+                getYear(jsonData,'3-5年')
+                break
+            case 4:
+                getYear(jsonData,'5-10年')
+                break
+            case 5:
+                getYear(jsonData,'10年以上')
+                break
+        }
+    }
+    // 学历
+    function searchDegree(i) {
+        $('#degree div').css('color','#333333')
+        $('#degree'+i).css('color','#F22036')
+        switch (i) {
+            case 1:
+                getDegree(jsonData,'大专')
+                break
+            case 2:
+                getDegree(jsonData,'本科')
+                break
+            case 3:
+                getDegree(jsonData,'硕士')
+                break
+            case 4:
+                getDegree(jsonData,'博士')
+                break
+            case 5:
+                getDegree(jsonData,'不要求')
+                break
+        }
+    }
+    // salary
+    function searchSalary(i) {
+        $('#salary div').css('color','#333333')
+        $('#salary'+i).css('color','#F22036')
+        switch (i) {
+            case 1:
+                getSalary(jsonData,'5k-10k')
+                break
+            case 2:
+                getSalary(jsonData,'10k-15k')
+                break
+            case 3:
+                getSalary(jsonData,'15k-25k')
+                break
+            case 4:
+                getSalary(jsonData,'25k-50k')
+                break
+            case 5:
+                getSalary(jsonData,'50k以上')
+                break
+        }
+    }
+    // 文档加载完成
+    $(document).ready(function(){
+        $('#job1').css('color','#F22036')
+        $('#area1').css('color','#F22036')
+    })
+</script>
+<!--侧边工具栏组件-->
+<script type="text/javascript" src="newOfficial/js/sideMenu.js"></script>
+<script src="newOfficial/js/sweetalert.min.js"></script>
+<link rel="stylesheet" href="newOfficial/CSS/sweetalert.css">
+</html>

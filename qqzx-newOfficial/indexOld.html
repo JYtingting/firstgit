@@ -1,0 +1,292 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>全球自选</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .wrapper{
+            min-width: 1024px;
+        }
+        .top{
+            margin: 0 auto;
+            display: flex;
+            justify-content:flex-start;
+            height: 50px;
+            align-items: center;
+        }
+        .inner-head{
+            margin: 0 auto;
+            width: 1000px;
+            display: flex;
+        }
+        .top-des{
+            font-size:48px;
+            color: #333333;
+            font-weight:500;
+            margin: 5px 0;
+        }
+        .top-img-des{
+            width: 287px;
+            margin-top: 5px;
+        }
+        .QrImg{
+            display: flex;
+        }
+        .QrImg img{
+            width: 152px;
+            height: 176px;
+            margin-left: 16px;
+            margin-top: 50px;
+        }
+        .body-top-right img{
+            width: 540px;
+            height: 302px;
+        }
+        .top-icon{
+            width: 105px;
+            height: 30px;
+        }
+        .top-menu{
+            text-decoration: none;
+            margin-left: 60px;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+        .body-top{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 540px;
+        }
+        .body-intro{
+            display: flex;
+            justify-content: space-around;
+            height: 720px;
+            background: #F8374D;
+            align-items: center;
+        }
+        .body-intro-left img{
+            width: 335px;
+        }
+        .body-intro-right img{
+            width:507px;
+            height:338px;
+        }
+        .intro-title{
+            font-size:36px;
+            font-weight:500;
+            color: #fff;
+        }
+        .intro-des{
+            font-size:16px;
+            font-weight:400;
+            color: #fff;
+            width: 451px;
+            line-height: 36px;
+            opacity: 0.9;
+        }
+        .body-advantage{
+            height: 800px;
+            text-align: center;
+        }
+        .body-advantage img{
+            width: 387px;
+            margin-top: 80px;
+        }
+        .body-advantage h3{
+            font-size: 36px;
+            color: #333;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        .advantage-wrapper{
+            display: flex;
+            justify-content: center;
+        }
+        .wrapper-item{
+            margin-left: 143px;
+        }
+        .wrapper-item img{
+            width: 80px;
+            height: 80px;
+        }
+        .item-first{
+            font-size:20px;
+            color: #333333;
+            font-weight:500;
+            margin-top: 34px;
+        }
+        .item-second{
+            font-size:14px;
+            color:#555555;
+            font-weight:400;
+            margin-top: 10px;
+        }
+        .system-wrapper{
+            background: #FBFBFB;
+            height: 800px;
+            text-align: center;
+        }
+        .system-wrapper img{
+            width: 436px;
+            margin-top: 80px;
+        }
+        .system-wrapper h3{
+            font-size: 36px;
+            font-weight:500;
+            color: #333;
+        }
+        .system-lists{
+            display: flex;
+            justify-content: center;
+        }
+        .system-lists img{
+            width: 150px;
+            height: 150px;
+            margin-left: 200px;
+        }
+        .body-bottom{
+            height: 152px;
+            background: #39393B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-wrapper{
+            width: auto;
+            height: auto;
+            color: #fff;
+            text-align: center;
+            opacity: 0.9;
+        }
+        .bottom-wrapper .des{
+            margin-top: 10px;
+        }
+        .split-line{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            border-top: 1px solid rgba(216,216,216,0.2);
+            background: #39393B;
+            text-align: center;
+            font-size: 12px;
+        }
+        .split-line span {
+            opacity: 0.9;
+            color: #fff;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+        <div class="top">
+            <div class="inner-head">
+                <img class="top-icon" src="http://file.wchoosemall.com/platform/manager/pic/20190325/7583136973355011.png" alt="">
+                <div class="top-menu" id='index' href="" onclick="changeMenu(0)">首页</div>
+                <div class="top-menu" id='center'href="" onclick="changeMenu(1)">帮助中心</div>
+            </div>
+        </div>
+        <div class="body">
+            <div class="body-top">
+                <div class="body-top-left">
+                    <h3 class="top-des">全球好货</h3>
+                    <h3 class="top-des">任你随意挑选</h3>
+                    <img class="top-img-des" src="http://file.wchoosemall.com/platform/manager/pic/20190325/7587614664443575.png" alt="">
+                    <div class="QrImg">
+                        <img style="margin-left: 0" src="http://file.wchoosemall.com/platform/manager/pic/20190325/7416515517271711.png" alt="">
+                        <img src="http://file.wchoosemall.com/platform/manager/pic/20190404/8280132885805232.png" alt="">
+                    </div>
+                </div>
+                <div class="body-top-right">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7416426080754226.png" alt="">
+                </div>
+            </div>
+            <div class="body-intro">
+                <div class="body-intro-left">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7421611866890273.png" alt="">
+                    <h3 class="intro-title">全球自选简介</h3>
+                    <p class="intro-des">全球自选是一家社交电商新零售创业赋能平台，总部位于电商之都浙江省杭州市，是由原阿里巴巴的团队和明星杨晶晶共同创立。全球自选是一个集购物、社交、创业于一体的社交电商新零售创业赋能平台。旨在赋能全球创业者——让大众创业成为自由个性的生活方式。致力于利用最前沿的人工智能技术为平台提供AI相关产品及商业解决方案，通过AI赋能助力平台会员及合作伙伴提升商业效率和价值，实现社群运营精准流量帮扶。目前与微谷中国达成千万级战略合作。</p>
+                </div>
+                <div class="body-intro-right">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7421668558685295.png" alt="">
+                </div>
+            </div>
+            <div class="body-advantage">
+                <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7422022845941665.png" alt="">
+                <h3>我们的平台优势</h3>
+                <div class="advantage-wrapper">
+                    <div class="wrapper-item" style="margin-left: 0">
+                        <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7416904870208748.png" alt="">
+                        <div class="item-first">正品货源</div>
+                        <div class="item-second">品牌授权直采，正品保障 7天无理由退货（非海淘）</div>
+                    </div>
+                    <div class="wrapper-item">
+                        <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7588050596173502.png" alt="">
+                        <div class="item-first">轻松经营</div>
+                        <div class="item-second"> 不需要压货，一件代发 专属客服解决售前售后问题</div>
+                    </div>
+                    <div class="wrapper-item">
+                        <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7421969513190417.png" alt="">
+                        <div class="item-first">随时分享</div>
+                        <div class="item-second"> 丰富的商品素材 均可一键分享轻松转发</div>
+                    </div>
+                    <div class="wrapper-item">
+                        <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7588147110372278.png" alt="">
+                        <div class="item-first">专业培训</div>
+                        <div class="item-second"> 专属导师一对一培训 全程亲身指导所有问题</div>
+                    </div>
+                </div>
+            </div>
+            <div class="system-wrapper">
+                <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7422022845941665.png" alt="">
+                <h3>六大系统</h3>
+                <div class="system-lists">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7593662846255133.png" style="margin-left: 0" alt="">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7593655921349054.png" alt="">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7593649487703404.png" alt="">
+                </div>
+                <div class="system-lists">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7593642661576595.png" style="margin-left: 0" alt="">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7427478604528695.png" alt="">
+                    <img src="http://file.wchoosemall.com/platform/manager/pic/20190325/7593627703453158.png" alt="">
+                </div>
+            </div>
+            <div class="body-bottom">
+                <div class="bottom-wrapper">
+                    <div class="des">杭州自选科技有限公司</div>
+                    <div class="des">公司地址：浙江省杭州市富阳区银湖街道富闲路9号银湖创新中心5号楼2楼</div>
+                    <div class="des">电话：0571-87565212 </div>
+                </div>
+            </div>
+            <div class="split-line">
+                <span>浙ICP备19001142号 </span>
+            </div>
+        </div>
+    </div>
+</body></html>
+<script src="htdocs/h5/js/jquery-1.10.2.js"></script>
+<script>
+function changeMenu(num) {
+    if (num === 0) {
+        $('#index').css({'color':'#F8374D'})
+        $('#index').css({'border-bottom':'1px solid #F8374D'})
+        $('#center').css({'color':'#666'})
+        $('#center').css({'border-bottom':'0px'})
+    }else {
+        window.location.href='http://wchoosemall.com/htdocs/h5/faq.html'
+        $('#index').css({'color':'#666'})
+        $('#center').css({'color':'#F8374D'})
+        $('#center').css({'border-bottom':'1px solid #F8374D'})
+        $('#index').css({'border-bottom':'0px'})
+    }
+}
+changeMenu(0)
+</script>

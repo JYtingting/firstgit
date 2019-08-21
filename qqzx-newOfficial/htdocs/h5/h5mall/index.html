@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,user-scalable=0,telephone=no" name="viewport">
+    <link href="css/home.css" rel="stylesheet">
+    <script src="../../../newOfficial/js/jquery.js"></script>
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration:none;
+        }
+        a,button,input{-webkit-tap-highlight-color:rgba(255,0,0,0);}
+    </style>
+    <script>
+        document.title = '\u200E';
+        fnResize();
+        window.onresize = function () {
+            fnResize()
+        };
+
+        function fnResize() {
+            var deviceWidth = document.documentElement.clientWidth || window.innerWidth;
+            if (deviceWidth >= 750) {
+                deviceWidth = 750
+            }
+            if (deviceWidth <= 320) {
+                deviceWidth = 320
+            }
+            document.documentElement.style.fontSize = (deviceWidth / 10) + 'px'
+        }
+    </script>
+</head>
+<body>
+<!--<div class="top">-->
+    <!--<div class="searchInput">-->
+        <!--<form>-->
+            <!--<i class="iconfont">&#xe613;</i>-->
+            <!--<input type="search">-->
+        <!--</form>-->
+    <!--</div>-->
+    <!--<i class="iconfont" id="message">&#xe668;</i>-->
+<!--</div>-->
+<div class="slide" style="margin-bottom: 0;margin-top: 0.32rem"></div>
+<div class="mode1"></div>
+<div class="mode2"></div>
+<div class="mode3"></div>
+<div class="mode4"></div>
+<div class="mode5"></div>
+<div class="mode6"></div>
+<div class="nav">
+    <ul class="navFirst">
+       <li class="active" onclick="navClick(0)"><span>推荐</span></li>
+       <li onclick="navClick(1)"><span>新人手册</span></li>
+       <li onclick="navClick(2)"><span>会员必学</span></li>
+    </ul>
+</div>
+<div style="padding-top: 0;">
+    <div class="recommended">
+        <ul>
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="js/home-info.js"></script>
+</html>

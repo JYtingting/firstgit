@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="copyright" content="全球自选 版权所有" />
+    <meta name="author" content="全球自选" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="newOfficial/js/jquery.js"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
+    <link href="files/index/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/index/styles.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="newOfficial/CSS/normalCSS.css">
+    <link rel="stylesheet" type="text/css" href="recharge/css/amazeui.min.css" />
+    <link rel="stylesheet" type="text/css" href="recharge/css/main.css" />
+    <title>会员服务</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+        html {
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+        body{
+            background: rgba(243,244,246,1);
+            margin: 0;
+            padding: 0;
+            position: relative;
+            font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #333;
+        }
+
+
+    </style>
+</head>
+<body>
+<!--侧边工具栏-->
+<div class="side-menu-container" style="z-index: 999"></div>
+<!-- Unnamed (矩形) -->
+<div id="u414" class="ax_default box_1" style="position: static">
+    <div id="u414_div" class=""></div>
+</div>
+
+<div id="u419" class="ax_default label">
+    <div id="u419_div" class=""></div>
+    <div id="u419_text" class="text ">
+        <a href="index.html"><span>首页</span></a>
+    </div>
+</div>
+
+<!-- Unnamed (矩形) -->
+<div id="u420" class="ax_default label" style="cursor: pointer">
+    <div id="u420_div" class=""></div>
+    <div id="u420_text" class="text ">
+        <p><span>登录/注册</span></p>
+    </div>
+</div>
+
+<!-- Unnamed (矩形) -->
+<div id="u421" class="ax_default label">
+    <div id="u421_div" class=""></div>
+    <div id="u421_text" class="text ">
+        <a href="sevice.html"><span  style="color:rgba(212,32,24,1);">会员服务</span></a>
+    </div>
+</div>
+
+<div class="pay">
+    <!--主内容开始编辑-->
+    <div class="tr_recharge">
+        <form action="" class="am-form" id="doc-vld-msg">
+            <div class="tr_rechbox">
+                <div class="tr_rechhead">
+                    <img src="recharge/images/ys_head2.jpg" />
+                    <p>充值帐号：
+                        <a style="cursor: pointer">未登录</a>
+                    </p>
+                </div>
+                <div class="tr_rechli am-form-group">
+                    <ul class="ui-choose am-form-group" id="uc_01">
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio"  value="" name="docVlGender" required data-validation-message="请选择一项充值额度"> 15￥/ 一个月
+                            </label>
+                        </li>
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 50￥/ 六个月
+                            </label>
+                        </li>
+
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 100￥/ 年
+                            </label>
+                        </li>
+                        <li>
+                            <label class="am-radio-inline">
+                                <input type="radio" name="docVlGender" data-validation-message="请选择一项充值额度"> 其他金额
+                            </label>
+                        </li>
+                    </ul>
+                    <!--<span>1招兵币=1元 10元起充</span>-->
+                </div>
+                <div class="tr_rechoth am-form-group">
+                    <span>其他金额：</span>
+                    <input type="number" min="10" max="10000" value="10.00元" class="othbox" data-validation-message="充值金额范围：10-10000元" />
+                    <!--<p>充值金额范围：10-10000元</p>-->
+                </div>
+                <div class="tr_rechcho am-form-group">
+                    <span>充值方式：</span>
+                    <label class="am-radio">
+                        <input type="radio" name="radio1" value="" data-am-ucheck required data-validation-message="请选择一种充值方式"><img src="recharge/images/wechatpay.png"/>
+                    </label>
+                    <label class="am-radio" style="margin-right:30px;">
+                        <input type="radio" name="radio1" value="" data-am-ucheck data-validation-message="请选择一种充值方式"><img src="recharge/images/zfbpay.png"/>
+                    </label>
+                </div>
+                <div class="tr_rechnum">
+                    <span>应付金额：</span>
+                    <p class="rechnum">0.00元</p>
+                </div>
+            </div>
+            <div class="tr_paybox">
+                <input type="submit" value="确认支付" class="tr_pay am-btn" />
+                <span>遇到问题请拨打联系电话。</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 遮罩层 (动态面板) -->
+<div id="u435" class="ax_default ax_default_hidden" data-label="遮罩层" style="display:none; visibility: hidden;width: 100%;height: 100%">
+    <div id="u435_state0" class="panel_state" data-label="State1" style="">
+        <div id="u435_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u436" class="ax_default box_1">
+                <div id="u436_div" class=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 登录 (动态面板) -->
+<div id="u437" class="ax_default ax_default_hidden" data-label="登录" style="display:none; visibility: hidden">
+    <div id="u437_state0" class="panel_state" data-label="State1" style="">
+        <div id="u437_state0_content" class="panel_state_content">
+
+            <!-- Unnamed (矩形) -->
+            <div id="u438" class="ax_default box_1">
+                <div id="u438_div" class=""></div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u439" class="ax_default box_1">
+                <div id="u439_div" class=""></div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u440" class="ax_default label">
+                <div id="u440_div" class=""></div>
+                <div id="u440_text" class="text ">
+                    <p><span>登录</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u441" class="ax_default label" style="cursor: pointer">
+                <div id="u441_div" class=""></div>
+                <div id="u441_text" class="text ">
+                    <p><span>X</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u442" class="ax_default box_1">
+                <div id="u442_div" class=""></div>
+                <div id="u442_text" class="text ">
+                    <p><span>登录</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u443" class="ax_default label">
+                <div id="u443_div" class=""></div>
+                <div id="u443_text" class="text ">
+                    <p><span>注册帐号</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u444" class="ax_default label">
+                <div id="u444_div" class=""></div>
+                <div id="u444_text" class="text ">
+                    <p><span>找回密码</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u445" class="ax_default text_field">
+                <input id="u445_input" type="text" value=""/>
+            </div>
+
+            <!-- Unnamed (文本框) -->
+            <div id="u446" class="ax_default text_field">
+                <input id="u446_input" type="password" value=""/>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u447" class="ax_default label">
+                <div id="u447_div" class=""></div>
+                <div id="u447_text" class="text ">
+                    <p><span>帐号</span></p>
+                </div>
+            </div>
+
+            <!-- Unnamed (矩形) -->
+            <div id="u448" class="ax_default label">
+                <div id="u448_div" class=""></div>
+                <div id="u448_text" class="text ">
+                    <p><span>密码</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    $(function () {
+        $('#u420,.tr_rechhead a,.tr_pay').click(function () {
+            $('#u435').css({"display":"block","visibility":"inherit"})
+            $('#u437').css({"display":"block","visibility":"inherit"})
+            return false
+        });
+        $('#u441').click(function () {
+            $('#u435').css({"display":"none","visibility":"hidden"})
+            $('#u437').css({"display":"none","visibility":"hidden"})
+        })
+    })
+</script>
+<script type="text/javascript" src="newOfficial/js/sideMenu.js"></script>
+<script src="newOfficial/js/js.js"></script>
+<script type="text/javascript" src="recharge/js/amazeui.min.js"></script>
+<script type="text/javascript" src="recharge/js/ui-choose.js"></script>
+<script type="text/javascript">
+    // 将所有.ui-choose实例化
+    $('.ui-choose').ui_choose();
+    // uc_01 ul 单选
+    var uc_01 = $('#uc_01').data('ui-choose'); // 取回已实例化的对象
+    // uc_01.click = function(index, item) {
+    //     console.log('click', index, item.text())
+    // }
+    // uc_01.change = function(index, item) {
+    //     console.log('change', index, item.text())
+    // }
+    $(function() {
+        $('#uc_01 li:eq(3)').click(function() {
+            $('.tr_rechoth').show();
+            $('.tr_rechoth').find("input").attr('required', 'true')
+            $('.rechnum').text('10.00元');
+        })
+        $('#uc_01 li:eq(0)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('15.00元');
+            $('.othbox').val('');
+        })
+        $('#uc_01 li:eq(1)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('50.00元');
+            $('.othbox').val('');
+        })
+        $('#uc_01 li:eq(2)').click(function() {
+            $('.tr_rechoth').hide();
+            $('.rechnum').text('100.00元');
+            $('.othbox').val('');
+        })
+        $(document).ready(function() {
+            $('.othbox').on('input propertychange', function() {
+                var num = $(this).val();
+                $('.rechnum').html(num + ".00元");
+            });
+        });
+    })
+
+    $(function() {
+        $('#doc-vld-msg').validator({
+            onValid: function(validity) {
+                $(validity.field).closest('.am-form-group').find('.am-alert').hide();
+            },
+            onInValid: function(validity) {
+                var $field = $(validity.field);
+                var $group = $field.closest('.am-form-group');
+                var $alert = $group.find('.am-alert');
+                // 使用自定义的提示信息 或 插件内置的提示信息
+                var msg = $field.data('validationMessage') || this.getValidationMessage(validity);
+
+                if(!$alert.length) {
+                    $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                    appendTo($group);
+                }
+                $alert.html(msg).show();
+            }
+        });
+    });
+</script>
+
+</html>

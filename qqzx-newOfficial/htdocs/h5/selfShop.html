@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自选商学院</title>
+  <link rel="stylesheet" href="./css/self-shop.css">
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+
+    function fnResize() {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="art"></div>
+<script src="./js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+  const list = [
+    {
+      title: '全球自选APP使用说明',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490168587872144.png',
+      id: 0
+    },
+    {
+      title: '如何构建微信客户群销售',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490253443244806.png',
+      id: 1
+    },
+    {
+      title: '如何让朋友圈帮忙成交',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490271857818061.png',
+      id: 2
+    },
+    {
+      title: '如何塑造朋友圈形象',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490288536628573.png',
+      id: 3
+    },
+    {
+      title: '如何维护零售客户',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490305870950106.png',
+      id: 4
+    },
+    {
+      title: '如何寻找第一批客户',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490320841684765.png',
+      id: 5
+    },
+    {
+      title: '如何转化邀约会员',
+      avatar: 'http://file.wegoomall.cn/platform/manager/pic/20181218/5490332144302935.png',
+      id: 6
+    }
+  ]
+  $(document).ready(function () {
+    for (let i = 0; i < list.length; i++) {
+      i !== list.length - 1
+        ? $('.art').append(
+        `<div class="pa clearfix" onclick="window.location.href='article.html?id=${list[i].id}'"><img src="${list[i].avatar}" alt=""><div class="ava">${list[i].title}</div></div><div class="bor-1"></div>`
+        )
+        : $('.art').append(
+        `<div class="pa clearfix" onclick="window.location.href='article.html?id=${list[i].id}'"><img src="${list[i].avatar}" alt=""><div class="ava">${list[i].title}</div></div>`
+        )
+
+    }
+  });
+</script>
+</body>
+</html>

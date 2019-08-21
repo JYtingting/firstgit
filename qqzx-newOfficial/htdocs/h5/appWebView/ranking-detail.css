@@ -1,0 +1,231 @@
+html {
+  background-color: #1D1D1D;
+}
+@media only screen and (min-width: 310px){
+  html {
+    font-size: 42px !important;
+  }
+}
+@media only screen and (min-width: 375px){
+  html {
+    font-size: 50px !important;
+  }
+}
+@media only screen and (min-width: 414px){
+  html {
+    font-size: 55px !important;
+  }
+}
+body {
+  margin: 0;
+  width: 100%;
+}
+
+input {
+  -webkit-appearance: none;
+}
+
+a {
+  text-decoration: none
+}
+
+ul {
+  list-style-type: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  height: 0;
+  clear: both;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+/*单行溢出*/
+.one-txt-cut {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+}
+
+/*多行溢出 手机端使用*/
+.txt-cut {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+* {
+  margin: 0;
+  padding: 0
+}
+
+.container {
+  width: 100%
+}
+.header {
+  padding: 0.11rem 0 0.1rem 0;
+  background-color: #1D1D1D;
+}
+.header .swiper {
+  width: 3.7rem;
+  margin: auto;
+}
+.header .swiper .left {
+  position: relative;
+  float: left;
+  width: 1.75rem;
+  line-height: 0.64rem;
+  height: 0.62rem;
+  background-color: #1D1D1D;
+  color: #F0C27F;
+  text-align: center;
+  font-size: 0.3rem;
+  border: 0.01rem solid #F0C27F;
+  font-family: PingFangSC-Medium,sans-serif;
+  font-weight: 500;
+}
+.header .swiper .right {
+  background-color: #1D1D1D;
+  color: #F0C27F;
+  border: 0.01rem solid #F0C27F;
+  position: relative;
+  float: left;
+  width: 1.75rem;
+  line-height: 0.62rem;
+  height: 0.62rem;
+  text-align: center;
+  font-size: 0.3rem;
+  font-family: PingFangSC-Medium,sans-serif;
+  font-weight: 500;
+}
+.header .swiper .select {
+  border: 0.01rem solid #F0C27F;
+  background-color: #F0C27F;
+  color: #1D1D1D;
+}
+.top_menu {
+  width: 100%;
+  padding-top: 0.26rem;
+  height: 0.86rem;
+  display: flex;
+  text-align: center;
+  margin-bottom: 0.02rem;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium,sans-serif;
+  font-weight:500;
+  color: #F0C27F;
+  line-height: 0.86rem;
+  background-color: #1D1D1D;
+}
+
+.common {
+  position: relative;
+  width: 50%
+}
+
+.ul {
+  width: 100%;
+  position: relative;
+  overflow-x: hidden
+}
+
+.bottom_content {
+  width: 200%;
+  min-height: 12.3rem;
+  display: flex;
+  transition: all .5s ease;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.body_1 {
+  background-color: #fff;
+  padding: 0.45rem 0.36rem;
+  width: 100%;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium,sans-serif;
+  font-weight: 800;
+  color:rgba(26,22,21,1);
+}
+.sales-num {
+  font-size: 0.3rem;
+  font-family: PingFangSC-Regular, sans-serif;
+  font-weight: 400;
+  color: rgba(26,22,21,1);
+}
+.li-active .bottom-line {
+  position: relative;
+  width: 1rem;
+  height: 0.04rem;
+  margin: 0 auto;
+  bottom: 0.03rem;
+  background-color: #F0C27F;
+}
+
+.body_1 .left-item {
+  position: relative;
+  float: left;
+  width: 2.86rem;
+}
+.body_1 .middle-item {
+  position: relative;
+  float: left;
+  width: 2.3rem;
+}
+.ft-32 {
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular, sans-serif;
+  font-weight:400;
+}
+.body_1 .right-item {
+  position: relative;
+  float: right;
+}
+.t-left {
+  text-align: left;
+}
+.r-left {
+  text-align: right;
+}
+.ranking-list {
+  height: 1.32rem;
+  line-height: 1.32rem;
+}
+.ranking-list .item {
+  border-bottom: 0.01rem solid #d8d8d8;
+}
+.ranking-list .item .ranking-num{
+  position: relative;
+  float: left;
+  font-size: 0.28rem;
+  width: 0.48rem;
+  text-align: center;
+  font-family: DINAlternate-Bold,sans-serif;
+  font-weight: bold;
+  color: rgba(51,51,51,1);
+}
+.ranking-list .item .ranking-img {
+  position: relative;
+  float: left;
+  top: 0.4rem;
+  width: 0.54rem;
+}
+.ranking-list .item .ranking-header {
+  position: relative;
+  float: left;
+  margin-top: 0.25rem;
+  margin-left: 0.4rem;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 100%;
+}

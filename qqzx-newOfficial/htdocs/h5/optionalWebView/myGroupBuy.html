@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>我的团购</title>
+  <link rel="stylesheet" href="my-group-buy.css">
+  <script src="../js/jquery-1.10.2.js"></script>
+  <script src="../js/util.js"></script>
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize () {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="group-item">
+</div>
+<script type="text/javascript">
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  let baseUrl = ''
+  getQueryString('dev') ? baseUrl = 'http://192.168.0.113:8080' : baseUrl = 'http://api.wchoosemall.com'
+
+  // const token = 'c1a0b35ad0854986b2f81b5cf614709'
+  const token = ''
+  $.ajax({
+    type: 'post',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    url: `${baseUrl}/doc/api/common/auth/groupBuy/findMyGroupBuyItems?token=${token}`,
+    success: (res) => {
+      const list = res.data.list
+      let fir = ''
+      for (let i = 0; i < list.length; i++) {
+        fir += `  <div class="item clearfix"><img src="${list[i].picUrls[0]}" alt=""><div class="info"><div class="name txt-cut">${list[i].name}</div><div class="price">团购价<span>¥${priceFormat(list[i].memberPrice)}</span></div><div class="sell">总销量：<span>${list[i].sellNum}</span></div></div></div>`
+      }
+      $('.group-item').html(fir)
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0;
+    height: 100%;
+}
+.warpper{
+    padding-bottom: 120px;
+    position: relative;
+    height: 100%;
+}
+.warpper-modal{
+    display: none;
+    background:rgba(39,39,39,1);
+    opacity:0.5383;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+img{
+    width: 100%;
+}
+.bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: #fff;
+    background: #F8374D;
+    font-size: 36px;
+    cursor: pointer;
+    font-weight:400;
+}
+/*模态框*/
+.modal-mobile{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 457px;
+    background: #fff;
+    width: 100%;
+}
+.modal-top{
+    font-size:30px;
+    font-weight:400;
+    color: #1A1615;
+    text-align: center;
+    margin-top: 30px;
+    border-radius:14px 14px 0px 0px;
+}
+.back{
+    width: 16px;
+    height: 29px;
+    float: left;
+    margin-top: 7px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+.close{
+    width: 23px;
+    height: 23px;
+    float: right;
+    margin-top: 7px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+input{
+    background:none;
+    outline:none;
+    border:0px;
+    padding: 0 20px;
+}
+.warpper-input{
+    display: flex;
+    justify-content: center;
+    margin-top: 64px;
+}
+.wrong-num{
+    display: none;
+}
+.wrong-num span{
+    color: #F8374D;
+    font-size:24px;
+    font-weight:400;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.modal-input{
+    height:81px;
+    background:rgba(244,244,244,1);
+    border-radius:8px;
+    font-size:30px;
+    font-weight:400;
+    color: #1A1615;
+    width: 690px;
+}
+input::-webkit-input-placeholder {
+  color: #9B9B9B;
+    font-size:30px;
+    font-weight:400;
+}
+/* Internet Explorer 10+ */
+input:-ms-input-placeholder {
+    color: #C0C0C0;
+    font-size: 14px;
+}
+.userInfo {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 64px;
+}
+.userInfo img{
+    width:120px;
+    height:120px;
+    background:rgba(255,255,255,1);
+    border-radius:60px;
+    margin-left: 30px;
+}
+.userInfo-des{
+    margin-left: 30px;
+}
+.userInfo-des-nickname{
+    font-size: 32px;
+    color: #1A1615;
+}
+.userInfo-des-id{
+    color: #9B9B9B;
+    font-size: 28px;
+    margin-top: 15px;
+}

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,telephone=no">
+  <title>　</title>
+  <link rel="stylesheet" href="http://www.wchoosemall.com/htdocs/h5/css/active.css">
+  <script>
+    document.title = '\u200E'
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize () {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="header">
+  <img class="activity-pic" src="" alt="" />
+</div>
+<div class="active-main">
+  <div class="coupon clearfix"></div>
+  <div class="desc">注：限<span class="start-date"></span>-<span class="end-date"></span>可用</div>
+  <nav class="nav">
+    <div class="tab-area clearfix"></div>
+  </nav>
+  <div class="act-con"></div>
+</div>
+<script src="http://www.wchoosemall.com/htdocs/h5/js/jquery-1.10.2.js"></script>
+<script src="http://www.wchoosemall.com/htdocs/h5/js/jquery.navScroll.js"></script>
+<script src="http://www.wchoosemall.com/htdocs/h5/js/util.js"></script>
+<script type="text/javascript">
+  // webview连接
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  // 获取优惠券信息
+  function getTicket (id){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getTicket', {'id': `${id}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        getTicket(id)
+      }, 50)
+    }
+  }
+  // 获取客户端url跳转
+  function buyNow (id){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUrlTo', {'page': `wg://push.chuang.co?page=prodDetail&prodId=${id}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        buyNow(id)
+      }, 50)
+    }
+  }
+  // 获取客户端用户信息
+  function getUserInfo (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        let level = 0
+        if (response !== null) {
+          level = JSON.parse(response).level
+        }
+        // 活动数据拉取
+        const activityId = {
+          activityId: getQueryString('activityId')
+        }
+        let baseUrl = ''
+        getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+
+        $.ajax({
+          type : 'post',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          url: `${baseUrl}/doc/api/common/activity/findActivity.json`,
+          data: `data=${JSON.stringify(activityId)}`,
+          success: (res) => {
+            const data = res.data.activityVO
+            const startDate = `${new Date(data.activity.startDate).getMonth() + 1}.${new Date(data.activity.startDate).getDate()}`
+            const endDate = `${new Date(data.activity.endDate).getMonth() + 1}.${new Date(data.activity.endDate).getDate()}`
+            $('.start-date').html(startDate)
+            $('.end-date').html(endDate)
+            $('.activity-pic').attr('src', data.activity.headUrl)
+            $('title').html(data.activity.name)
+            const couponList = data.couponDOList
+            // 优惠券遍历
+            for (let i = 0; i < couponList.length; i++) {
+              if (couponList.length === 1) {
+                $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="large-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819809026341627.png" /></a>`)
+              } else {
+                // 偶数优惠券
+                if (couponList.length % 2 === 0) {
+                  if (i % 2 === 0) {
+                    $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                  } else {
+                    $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card m-l12" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                  }
+                } else {
+                  // 奇数优惠券
+                  if (couponList.length !== i + 1) {
+                    // 非最后一行
+                    if (i % 2 === 0) {
+                      $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                    } else {
+                      $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card m-l12" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                    }
+                  } else {
+                    //  最后一行
+                    $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="large-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819809026341627.png" /></a>`)
+                  }
+                }
+              }
+            }
+            // 新人活动
+            if (data.activity.activityCode === 'newMemberActivity') {
+              $('.coupon').remove()
+              $('.desc').hide()
+            }
+            // 商品清单
+            const list = data.itemGroups
+            for (let i = 0; i < list.length; i++) {
+              // 插入标题区块
+              $('.tab-area').append(`<a href="#tab${i}">${list[i].groupName}</a>`)
+              // 插入题目
+              $('.act-con').append(`<div class="act-title"><img class="icon-title" src="https://file.wchoosemall.com/platform/manager/pic/active-left.png" alt="" /> ${list[i].groupName} <img class="icon-title" src="https://file.wchoosemall.com/platform/manager/pic/active-right.png" alt="" /></div>`)
+              // 插入内容区块
+              const fir = `<div class="type-${list[i].styleType} clearfix" id="tab${i}">`
+              let sec = ''
+              const thi = `</div>`
+              // 全部商品插入区
+              for (let o = 0; o < list[i].items.length; o++) {
+                if (list[i].styleType === 1) {
+                  // 根据用户等级判断展示价格
+                  if (level >= 10) {
+                    if (list[i].items[o].title !== undefined) {
+                      // 校验title可能为undefined
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    } else {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    }
+                  } else {
+                    if (list[i].items[o].title !== undefined) {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    } else {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    }
+                  }
+                } else {
+                  // 根据用户等级判断展示价格
+                  if (level >= 10) {
+                    if (list[i].items[o].title !== undefined) {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    } else {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    }
+                  } else {
+                    if (list[i].items[o].title !== undefined) {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    } else {
+                      sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                    }
+                  }
+                }
+              }
+              $('.act-con').append(fir + sec + thi)
+            }
+            if (list.length === 1) {
+              $('.nav').html('')
+            }
+            // 滚动实例化
+            $('.nav').navScroll({
+              mobileDropdown: true,
+              mobileBreakpoint: 768,
+              scrollSpy: true
+            })
+          }
+        })
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo()
+      }, 50)
+    }
+  }
+  getUserInfo()
+
+
+
+
+  if (getQueryString('mode') === 'view') {
+    const level = 10
+    // 活动数据拉取
+    const activityId = {
+      activityId: getQueryString('activityId')
+    }
+    let baseUrl = ''
+    getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+
+    $.ajax({
+      type : 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/doc/api/common/activity/findActivity.json`,
+      data: `data=${JSON.stringify(activityId)}`,
+      success: (res) => {
+        const data = res.data.activityVO
+        const startDate = `${new Date(data.activity.startDate).getMonth() + 1}.${new Date(data.activity.startDate).getDate()}`
+        const endDate = `${new Date(data.activity.endDate).getMonth() + 1}.${new Date(data.activity.endDate).getDate()}`
+        $('.start-date').html(startDate)
+        $('.end-date').html(endDate)
+        $('.activity-pic').attr('src', data.activity.headUrl)
+        $('title').html(data.activity.name)
+        const couponList = data.couponDOList
+        // 优惠券遍历
+        for (let i = 0; i < couponList.length; i++) {
+          if (couponList.length === 1) {
+            $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="large-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819809026341627.png" /></a>`)
+          } else {
+            // 偶数优惠券
+            if (couponList.length % 2 === 0) {
+              if (i % 2 === 0) {
+                $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+              } else {
+                $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card m-l12" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+              }
+            } else {
+              // 奇数优惠券
+              if (couponList.length !== i + 1) {
+                // 非最后一行
+                if (i % 2 === 0) {
+                  $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                } else {
+                  $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="small-card m-l12" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819826824024180.png" /></a>`)
+                }
+              } else {
+                //  最后一行
+                $('.coupon').append(`<a href="javascript:void(0);" onclick="getTicket(${couponList[i].id})"><img class="large-card" src="http://file.wegoomall.cn/platform/manager/pic/20190301/11819809026341627.png" /></a>`)
+              }
+            }
+          }
+        }
+        // 新人活动
+        if (data.activity.activityCode === 'newMemberActivity') {
+          $('.coupon').remove()
+          $('.desc').hide()
+        }
+        // 商品清单
+        const list = data.itemGroups
+        for (let i = 0; i < list.length; i++) {
+          // 插入标题区块
+          $('.tab-area').append(`<a href="#tab${i}">${list[i].groupName}</a>`)
+          // 插入题目
+          $('.act-con').append(`<div class="act-title"><img class="icon-title" src="https://file.wchoosemall.com/platform/manager/pic/active-left.png" alt="" /> ${list[i].groupName} <img class="icon-title" src="https://file.wchoosemall.com/platform/manager/pic/active-right.png" alt="" /></div>`)
+          // 插入内容区块
+          const fir = `<div class="type-${list[i].styleType} clearfix" id="tab${i}">`
+          let sec = ''
+          const thi = `</div>`
+          // 全部商品插入区
+          for (let o = 0; o < list[i].items.length; o++) {
+            if (list[i].styleType === 1) {
+              // 根据用户等级判断展示价格
+              if (level >= 10) {
+                if (list[i].items[o].title !== undefined) {
+                  // 校验title可能为undefined
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                } else {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                }
+              } else {
+                if (list[i].items[o].title !== undefined) {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                } else {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                }
+              }
+            } else {
+              // 根据用户等级判断展示价格
+              if (level >= 10) {
+                if (list[i].items[o].title !== undefined) {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                } else {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].memberPrice - couponList[0].denomination : list[i].items[o].memberPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].marketPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                }
+              } else {
+                if (list[i].items[o].title !== undefined) {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].title}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                } else {
+                  sec = sec + `<div class="type-goods-${list[i].styleType} clearfix"><img class="type-img-${list[i].styleType}" src="${list[i].items[o].picUrls[0]}" /><div class="type-title-${list[i].styleType} txt-cut">${list[i].items[o].name}</div><div class="type-price-${list[i].styleType} clearfix"><div class="member"><span></span>¥${priceFormat(couponList[0] ? list[i].items[o].marketPrice - couponList[0].denomination : list[i].items[o].marketPrice)}</div><div class="market">¥${priceFormat(list[i].items[o].showPrice)}</div></div><div><input class="type-buy-${list[i].styleType}" type="button" value="立即购买" onclick="buyNow(${list[i].items[o].id})" /></div></div>`
+                }
+              }
+            }
+          }
+          $('.act-con').append(fir + sec + thi)
+        }
+        if (list.length === 1) {
+          $('.nav').html('')
+        }
+        // 滚动实例化
+        $('.nav').navScroll({
+          mobileDropdown: true,
+          mobileBreakpoint: 768,
+          scrollSpy: true
+        })
+      }
+    })
+  }
+
+
+
+
+
+
+
+  // 滚动动销
+  const getDiv_md = $(".tab-area");
+  const offSet = getDiv_md.offset().top;
+  $(window).scroll(function(){
+    // 浮层效果
+    if ($(window).scrollTop() > offSet){
+      getDiv_md.css({"position":"fixed","top":"0","z-index":"2"});
+    }else{
+      getDiv_md.css({"position":"","left":"0px","top":"","z-index":""});
+    }
+  })
+</script>
+</body>
+</html>
+

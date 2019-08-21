@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      width: 100%;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+<img style="width: 100%;" src="" alt="">
+<script src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    const type = getQueryString('type')
+    switch (type) {
+      case '0':
+        $('title').html('工商资质')
+        $('img').attr('src', 'http://file.wchoosemall.com/platform/manager/pic/20190321/7272062448601650.jpg')
+        break
+      case '1':
+        $('title').html('食品经营许可证')
+        $('img').attr('src', 'http://file.wegoomall.cn/platform/manager/pic/20190108/7331157827756174.jpg')
+        break
+    }
+  })
+  function getQueryString(name) {
+    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+      return unescape(r[2]);
+    }
+    return null;
+  }
+</script>
+</body>
+</html>

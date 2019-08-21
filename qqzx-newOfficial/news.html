@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="全球自选资讯页每天发布公司最新动态，实时更新社交电商行业新闻，分享最新最热新零售动态。">
+    <meta name="copyright" content="全球自选 版权所有" />
+    <meta name="author" content="全球自选" />
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="newOfficial/js/jquery.js"></script>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
+    <link rel="stylesheet" href="newOfficial/CSS/normalCSS.css">
+    <link rel="stylesheet" href="newOfficial/CSS/informationCss.css">
+    <link rel="stylesheet" href="newOfficial/CSS/myPagination.css">
+    <title>全球自选资讯 - 社交电商新闻_新零售行业动态</title>
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+        body{
+            margin: 0;
+        }
+        li{list-style-type:none;}
+        a {text-decoration: none;}
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e13d9d4b40bace93f3151eeee9c7a741";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<!--侧边工具栏-->
+<div class="side-menu-container"></div>
+<div class="nav">
+    <div class="nav-2">
+        <img src="https://file.wchoosemall.com/platform/manager/pic/20190614/14605770643972654.png" class="logo2" alt="全球自选官网">
+        <ul class="links">
+            <li><a class="nav-recruit" href="index.html" rel="nofollow">首页</a></li>
+            <li><a class="nav-home" href="recruitment.html">全球自选介绍</a></li>
+            <!--<li><a class="nav-download" href="app.html">APP下载</a></li>-->
+            <li><a class="nav-consultation" href="news.html"  style="color:rgba(212,32,24,1);">资讯</a></li>
+            <li><a class="nav-help" href="help.html">帮助中心</a></li>
+            <li><a class="nav-about" href="about.html">关于我们</a></li>
+        </ul>
+    </div>
+</div>
+<div class="background-image"></div>
+<div class="topic-top">
+    <div class="topic-top-text">资讯中心</div>
+    <div class="white-line"></div>
+</div>
+<div class="body-container">
+    <div class="news-center">
+        <div class="top-guide">
+            <div class="brown-icon"></div>
+            <div class="top-guide-content">
+                <a href="index.html">首页</a><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6477903504460191.png" style="margin: 0 6px" width="6" height="9" alt=""><a href="./news.html">资讯中心</a><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6477903504460191.png" style="margin: 0 6px" width="6" height="9" alt=""><a class="top-guide-name"></a>
+            </div>
+        </div>
+        <div class="long-line"></div>
+        <div class="news-nav">
+            <div class="news-nav-text" onclick="navClick(0)" id="dynamic">自选动态</div>
+            <div class="news-nav-text" onclick="navClick(1)" id="media">媒体报道</div>
+            <div class="news-nav-text" onclick="navClick(2)" id="industry">行业动态</div>
+        </div>
+        <div class="news-content-container">
+        </div>
+
+            <div id="pagination" class="pagination"></div>
+    </div>
+    <div class="sidebar">
+       <div class="new-rec">
+          <div class="top-guide">
+              <div class="brown-icon"></div>
+              <h3 class="top-guide-content">
+                  最新文章推荐
+              </h3>
+          </div>
+          <div class="rec-line"></div>
+          <div class="new-rec-container">
+          </div>
+      </div>
+       <div class="download">
+           <div class="download-img"><img src="https://file.wchoosemall.com/platform/manager/pic/20190610/6902568180269020.png" width="159" height="159" alt="全球自选APP"></div>
+           <div class="download-text">
+               <div style="display: flex;justify-content: center">【全球自选】APP</div>
+               <div style="display: flex;justify-content: center;">购物享受批发价扫码立即下载</div>
+               <div style="display: flex;justify-content: center;">扫码立即下载</div>
+           </div>
+       </div>
+       <div class="hot-rec">
+           <div class="top-guide">
+               <div class="brown-icon"></div>
+               <h3 class="top-guide-content">
+                   最热文章推荐
+               </h3>
+           </div>
+           <div class="rec-line"></div>
+           <div class="hot-rec-container">
+
+           </div>
+       </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-container"  style="height: 84px">
+        <div class="footer-nav">
+            <a href="about.html">关于全球自选</a><div class="footer-line"></div>
+            <a>自选APP</a><div class="footer-line"></div>
+            <a href="news.html">资讯动态</a><div class="footer-line"></div>
+            <a href="help.html">常见问题</a>
+        </div>
+        <div style="white-space: nowrap; min-width: 508px">浙ICP备19001142号-1 © 2019-2010 杭州自选科技有限公司,All RIGHTS RESERVED.</div>
+        <div><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6487721395327899.png" alt=""><img src="https://file.wchoosemall.com/platform/manager/pic/20190605/6487721385694615.png" style="margin-left:14px" alt=""></div>
+    </div>
+</div>
+</body>
+
+
+<script>
+$(function () {
+    // window.onload = function () {
+    //     new Page({
+    //         id: 'pagination',
+    //         pageTotal: 1, //必填,总页数
+    //         pageAmount: 5,  //每页多少条
+    //         dataTotal: 5, //总共多少条数据
+    //         curPage:1, //初始页码,不填默认为1
+    //         pageSize: 5, //分页个数,不填默认为5
+    //         showPageTotalFlag:true, //是否显示数据统计,不填默认不显示
+    //         showSkipInputFlag:true, //是否支持跳转,不填默认不显示
+    //         getPage: function (page) {
+    //             //获取当前页数
+    //             console.log(page);
+    //         }
+    //     })
+    // };
+
+     // $('.news-nav-text').click(function () {
+     //        $(".top-guide-name").text($(this).text());
+     //        $(this).addClass("news-nav-text-choose");
+     //        $(this).siblings().removeClass("news-nav-text-choose");
+     //    });
+
+})
+</script>
+<script src="newOfficial/js/moment.min.js"></script>
+<script src="newOfficial/js/js.js"></script>
+<script src="htdocs/h5/js/util.js"></script>
+<script src="newOfficial/js/News-info-news.js"></script>
+<!--分页  开发中↓-->
+<script src="newOfficial/js/myPagination.js"></script>
+<!--侧边工具栏组件-->
+<script type="text/javascript" src="newOfficial/js/sideMenu.js"></script>
+</html>

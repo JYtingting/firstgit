@@ -1,0 +1,106 @@
+.help-topic{
+    width: 1140px;
+    margin: 128px auto 0 auto;
+    font-size:16px;
+    font-family:PingFangSC-Medium,sans-serif;
+    font-weight:600;
+    color:rgba(51,51,51,1);
+    line-height:22px;
+}
+.help-container{
+    width: 1140px;
+    margin: 18px auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.help-menu-container{
+    width:176px;
+    height:708px;
+    background:rgba(255,255,255,1);
+    border-radius:2px;
+}
+.help-menu{
+    width: 114px;
+    margin: 30px auto 0 auto;
+    height: 356px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.help-menu-content{
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    cursor: pointer;
+}
+.help-menu-text-container{
+    width: 68px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.help-menu-text{
+    font-size:14px;
+    font-family:PingFangSC-Regular,sans-serif;
+    font-weight:400;
+    color:rgba(51,51,51,1);
+    line-height:20px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.help-menu-text-active{
+    font-family:PingFangSC-Semibold,sans-serif;
+    font-weight:600;
+    transition-duration:0.2s;
+}
+.help-menu-banner{
+    width:3px;
+    height:15px;
+}
+.help-menu-banner-active{
+    background:rgba(248,36,59,1);
+    transition-duration:1.2s;
+}
+.help-menu-img,.help-menu-img-active{
+    display: flex;
+    align-items: center;
+}
+
+.help-menu-img img,.help-menu-img-active img{
+    width:6px;
+    height:9px;
+}
+.help-menu-img-active{
+    transform:rotate(90deg);
+    transition-duration:0.3s;
+}
+.help-content-container{
+    width:950px;
+    background:rgba(255,255,255,1);
+    border-radius:2px;
+    padding-bottom: 30px;
+    overflow: hidden;
+}
+.help-content{
+    width: 890px;
+    margin: 0 auto 0 auto;
+}
+.help-content-ask{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size:14px;
+    font-family:PingFangSC-Semibold,sans-serif;
+    font-weight:600;
+    color:rgba(51,51,51,1);
+    line-height:20px;
+}
+.help-content-answer{
+    width: 580px;
+    font-size:12px;
+    font-family:PingFangSC-Regular,sans-serif;
+    font-weight:400;
+    color:rgba(102,102,102,1);
+    line-height:24px;
+}

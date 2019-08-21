@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>新人好礼大放送</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    .getUrlTo {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<img class="getUrlTo" style="width: 100%;display: block" src="https://file.wegoomall.cn/platform/manager/pic/20190429/3096680557087440.jpg" alt="">
+<script src="http://www.wchoosemall.com/htdocs/h5/js/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+
+  function getUrlTo (index){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUrlTo', {'page': `wg://push.chuang.co?page=couponList&queryFlag=${index}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        getUrlTo()
+      }, 50)
+    }
+  }
+
+  $('.getUrlTo').click(() => {
+    getUrlTo('1')
+  })
+</script>
+</body>
+</html>

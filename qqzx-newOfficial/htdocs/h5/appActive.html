@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,telephone=no">
+  <title>品牌折扣会场</title>
+  <link rel="stylesheet" href="css/app-active.css">
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize () {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="header">
+  <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550227401126&di=c71da042c8413046922f2e5751cd2226&imgtype=0&src=http%3A%2F%2Fimg.qqzhi.com%2Fuploads%2F2018-12-29%2F145607665.jpg" alt="" />
+</div>
+<div class="active">
+  <div class="title">// 面膜折扣专场 //</div>
+  <div class="coupon clearfix"></div>
+  <div class="item clearfix">
+  </div>
+</div>
+<script src="./js/jquery-1.10.2.js"></script>
+<script src="./js/util.js"></script>
+<script type="text/javascript">
+  const buyNow = (value) => {
+    alert(value)
+  }
+  // 获取优惠券
+  const couponList = [{
+    img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550823530&di=5252d841c9a8dc32c4c1a33acc998f96&imgtype=jpg&er=1&src=http%3A%2F%2Fcuimg.zuyushop.com%3A8014%2FcuxiaoPic%2Fimage%2FmmbAdmin%2F20160617093737_5285.png',
+    id: 0
+  },{
+    img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550823530&di=5252d841c9a8dc32c4c1a33acc998f96&imgtype=jpg&er=1&src=http%3A%2F%2Fcuimg.zuyushop.com%3A8014%2FcuxiaoPic%2Fimage%2FmmbAdmin%2F20160617093737_5285.png',
+    id: 0
+  },{
+    img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550823530&di=5252d841c9a8dc32c4c1a33acc998f96&imgtype=jpg&er=1&src=http%3A%2F%2Fcuimg.zuyushop.com%3A8014%2FcuxiaoPic%2Fimage%2FmmbAdmin%2F20160617093737_5285.png',
+    id: 0
+  }]
+  // 获取优惠商品
+  const goodsList = [
+    {
+      id: 0,
+      itemName: 'JMsolution急救补水针剂面膜',
+      marketPrice: 333,
+      memberPrice: 222,
+      img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550231153154&di=c494db676ce974f6d81fae95b7a93ff4&imgtype=0&src=http%3A%2F%2Fimg10.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft292%2F228%2F1942614163%2F151045%2F318f7fa2%2F5447685aN8b793d8e.jpg'
+    },
+    {
+      id: 0,
+      itemName: 'JMsolution急救补水针剂面膜',
+      marketPrice: 333,
+      memberPrice: 222,
+      img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550231153154&di=c494db676ce974f6d81fae95b7a93ff4&imgtype=0&src=http%3A%2F%2Fimg10.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft292%2F228%2F1942614163%2F151045%2F318f7fa2%2F5447685aN8b793d8e.jpg'
+    },
+    {
+      id: 0,
+      itemName: 'JMsolution急救补水针剂面膜',
+      marketPrice: 333,
+      memberPrice: 222,
+      img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550231153154&di=c494db676ce974f6d81fae95b7a93ff4&imgtype=0&src=http%3A%2F%2Fimg10.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft292%2F228%2F1942614163%2F151045%2F318f7fa2%2F5447685aN8b793d8e.jpg'
+    },
+    {
+      id: 1,
+      itemName: 'JMsolution急救补水针剂面膜JMsolution急救补水针剂面膜',
+      marketPrice: 33300,
+      memberPrice: 22200,
+      img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1550231153154&di=c494db676ce974f6d81fae95b7a93ff4&imgtype=0&src=http%3A%2F%2Fimg10.360buyimg.com%2FpopWaterMark%2Fjfs%2Ft292%2F228%2F1942614163%2F151045%2F318f7fa2%2F5447685aN8b793d8e.jpg'
+    }
+  ]
+  // 处理优惠券
+  for (let i = 0; i < couponList.length; i++) {
+    // 单张优惠券战士
+    if (couponList.length === 1) {
+      $('.coupon').append(`<img class="large-coupon" src="${couponList[i].img}" />`)
+    } else {
+      // 偶数优惠券
+      if (couponList.length % 2 === 0) {
+        if (i % 2 === 0) {
+          $('.coupon').append(`<img class="small-coupon" src="${couponList[i].img}" />`)
+        } else {
+          $('.coupon').append(`<img class="small-coupon m-l10" src="${couponList[i].img}" />`)
+        }
+      } else {
+        // 奇数优惠券
+        if (couponList.length !== i + 1) {
+          // 非最后一行
+          if (i % 2 === 0) {
+            $('.coupon').append(`<img class="small-coupon" src="${couponList[i].img}" />`)
+          } else {
+            $('.coupon').append(`<img class="small-coupon m-l10" src="${couponList[i].img}" />`)
+          }
+        } else {
+          //  最后一行
+          $('.coupon').append(`<img class="large-coupon" src="${couponList[i].img}" />`)
+        }
+      }
+    }
+  }
+  // 处理优惠商品
+  for (let i = 0; i < goodsList.length; i++) {
+    if (i % 3 === 0) {
+      $('.item').append(`<div class="goods"><img class="goods-img" src="${goodsList[i].img}"/><div class="goods-name txt-cut">${goodsList[i].itemName}</div><div class="goods-price"><span class="member-price">¥${priceFormat(goodsList[i].memberPrice)}</span><span class="market-price">¥${priceFormat(goodsList[i].marketPrice)}</span></div><input class="goods-buy" value="立即购买" type="button" onclick="buyNow(${goodsList[i].id})"/></div>`)
+    } else {
+      $('.item').append(`<div class="goods m-l9"><img class="goods-img" src="${goodsList[i].img}"/><div class="goods-name txt-cut">${goodsList[i].itemName}</div><div class="goods-price"><span class="member-price">¥${priceFormat(goodsList[i].memberPrice)}</span><span class="market-price">¥${priceFormat(goodsList[i].marketPrice)}</span></div><input class="goods-buy" value="立即购买" type="button" onclick="buyNow(${goodsList[i].id})"/></div>`)
+    }
+  }
+</script>
+</body>
+</html>

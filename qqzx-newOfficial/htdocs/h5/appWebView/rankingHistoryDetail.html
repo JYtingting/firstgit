@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>排行榜</title>
+  <script src="../js/flexible.js"></script>
+  <link rel="stylesheet" href="ranking-history-detail.css">
+  <script src="../js/jquery-1.10.2.js"></script>
+  <script src="../js/ua.js"></script>
+  <script src="../js/util.js"></script>
+</head>
+<body>
+<div class="top_menu">
+  <div class="common li-active">至尊VIP<div class="bottom-line"></div></div>
+  <div class="common">超级VIP<div class="bottom-line"></div></div>
+</div>
+<div class="ul">
+  <div class="bottom_content" style="left: 0;">
+    <div class="body_1">
+      <div class="title-list clearfix">
+        <div class="left-item t-left">排名</div>
+        <div class="middle-item t-left">用户</div>
+        <div class="right-item t-right">销售数</div>
+      </div>
+      <div class="ranking-list">
+      </div>
+    </div>
+    <div class="body_1">
+      <div class="title-list clearfix">
+        <div class="left-item t-left">排名</div>
+        <div class="middle-item t-left">用户</div>
+        <div class="right-item t-right">销售数</div>
+      </div>
+      <div class="ranking-list">
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  getStatusBar()
+  // 获取Android顶部高度
+  function getStatusBar (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getStatusBar', {}, function (response) {
+        const val = response / 100
+        if (browser.versions.android) {
+          $('.top_menu').css('padding-top', `${val}rem`)
+        }
+      })
+    } else {
+      setTimeout(() => {
+        getStatusBar()
+      }, 50)
+    }
+  }
+  let type = 0
+  $('.header').find('.right').click(() => {
+    if (type === 0) {
+      $('.header').find('.left').removeClass('select')
+      $('.header').find('.right').addClass('select')
+      $('.ranking-list').eq(0).html('')
+      $('.ranking-list').eq(1).html('')
+      $('.top_menu .common').eq(0).addClass('li-active').siblings().removeClass('li-active')
+      type++
+      getUserInfo(type)
+    }
+    // getQueryString('dev') ? window.location.href = `rankingDetail.html?activityId=${getQueryString('activityId')}&fullscreen=1&dev=1&type=1` :window.location.href = `/rankingDetail.html?activityId=${getQueryString('activityId')}&fullscreen=1&type=1`
+  })
+  $('.header').find('.left').click(() => {
+    if (type === 1) {
+      $('.header').find('.left').addClass('select')
+      $('.header').find('.right').removeClass('select')
+      $('.ranking-list').eq(0).html('')
+      $('.ranking-list').eq(1).html('')
+      $('.top_menu .common').eq(0).addClass('li-active').siblings().removeClass('li-active')
+      type--
+      getUserInfo(type)
+    }
+    // getQueryString('dev') ? window.location.href = `rankingDetail.html?activityId=${getQueryString('activityId')}&fullscreen=1&dev=1` : window.location.href = `rankingDetail.html?activityId=${getQueryString('activityId')}&fullscreen=1`
+  })
+  let baseUrl = ''
+  getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+  getUserInfo(0)
+  function getUserInfo (type){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        const token = JSON.parse(response).token
+        // 总监排行（至尊）
+        const extremeData = {
+          activityId: getQueryString('activityId'),
+          level: 30
+        }
+        // 经理排行（超级）
+        const superData = {
+          activityId: getQueryString('activityId'),
+          level: 20
+        }
+        getData(extremeData, 0, token)
+        getData(superData, 1, token)
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo(type)
+      }, 50)
+    }
+  }
+
+
+  // 测试数据
+  // const token = '523a674d87f6410093ce276fe614921'
+  // // 总监排行（至尊）
+  // const extremeData = {
+  //   activityId: getQueryString('activityId'),
+  //   level: 30
+  // }
+  // // 经理排行（超级）
+  // const superData = {
+  //   activityId: getQueryString('activityId'),
+  //   level: 20
+  // }
+  // getData(extremeData, 0, token)
+  // getData(superData, 1, token)
+
+
+
+
+
+
+  function getData (data, type, token) {
+    let url = 'getItemRanking'
+    $.ajax({
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/doc/api/common/auth/memberSales/${url}.json?token=${token}`,
+      data: `data=${JSON.stringify(data)}`,
+      success: (res) => {
+        $('.ranking-list').eq(type).html('')
+        const extremeList = res.data.list
+        for (let i = 0; i < extremeList.length; i++) {
+          const fir = `<div class="item clearfix"><div class="left-item t-left">`
+          let sec = ''
+          if (i === 0) {
+            sec = `<img class="ranking-img" src="http://file.wchoosemall.com/platform/manager/pic/20190417/9414554792527041.png" alt="" />`
+          } else if (i === 1) {
+            sec = `<img class="ranking-img" src="http://file.wchoosemall.com/platform/manager/pic/20190417/9419535768155090.png" alt="" />`
+          } else if (i === 2) {
+            sec = `<img class="ranking-img" src="http://file.wchoosemall.com/platform/manager/pic/20190417/9414554779934277.png" alt="" />`
+          } else if (i >= 3 && i < 9) {
+            sec = `<div class="ranking-num">0${i + 1}</div>`
+          } else{
+            sec = `<div class="ranking-num">${i + 1}</div>`
+          }
+          const thi = `<img class="ranking-header" src="${extremeList[i].avatar}" /></div><div class="middle-item t-left one-txt-cut ft-32">${extremeList[i].nickName}</div><div class="right-item t-right sales-num ft-32">${extremeList[i].salesNum}</div></div>`
+          $('.ranking-list').eq(type).append(fir + sec + thi)
+        }
+
+        // tab切换功能（滑动）
+        $('.bottom_content')[0].style.left = "0%"
+        var startX = '',disX =''
+        $('.top_menu').on('click','.common',function(){
+          var index = $(this).index()
+          $('.bottom_content').css('left','-' + index * 100 + '%')
+          $('.top_menu .common').eq(index).addClass('li-active').siblings().removeClass('li-active')
+        })
+        $('.bottom_content').on('touchstart','.body_1',function(e){
+          startX = e.originalEvent.changedTouches[0].clientX
+        })
+        $('.bottom_content').on('touchmove','.body_1',function(e){
+          e.stopPropagation()
+        })
+        $('.bottom_content').on('touchend','.body_1',function(e){
+          disX = e.originalEvent.changedTouches[0].clientX - startX
+          var leftNum = parseInt($('.bottom_content')[0].style.left)
+          if(disX > 0 && disX > 100) {
+            if(leftNum <= -100) {
+              $('.bottom_content')[0].style.left = leftNum + 100 + "%"
+              var order = -parseInt($('.bottom_content')[0].style.left)/100
+              $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+            }
+          } else if(disX < 0 && disX < -100) {
+            if ((-parseInt($('.bottom_content')[0].style.left))/100 === 1) {
+              return
+            }
+            if(leftNum >= -100) {
+              $('.bottom_content')[0].style.left = leftNum - 100 + "%"
+              var order = (-parseInt($('.bottom_content')[0].style.left))/100
+              $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+            }
+          }
+        })
+      }
+    })
+  }
+</script>
+</body>
+</html>

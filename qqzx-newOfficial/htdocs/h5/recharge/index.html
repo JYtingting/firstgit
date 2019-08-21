@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>h5充值</title>
+  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="../css/sweetalert.css">
+  <script>
+        fnResize()
+        window.onresize = function () {
+          fnResize()
+        }
+
+        function fnResize() {
+          var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+          if (deviceWidth >= 750) {
+            deviceWidth = 750
+          }
+          if (deviceWidth <= 320) {
+            deviceWidth = 320
+          }
+          document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+        }
+      </script>
+</head>
+<body>
+<div class="warpper">
+    <img src="http://file.wchoosemall.com/platform/manager/pic/20190320/6983247288393134.jpg" alt="">
+    <div class="bar" onclick="getPhone()">一键充值</div>
+</div>
+<div class="warpper-modal"></div>
+<!--模态框-->
+    <div class="modal-mobile" id="mobile">
+        <div class="modal-top">
+            请输入你要充值的手机号
+            <img class="close" src="../../h5/imges/close.png" onclick="cancel()" alt="">
+        </div>
+        <div class="warpper-input">
+             <input class="modal-input" placeholder="请输入" oninput="checkPhone()" type="text" value="" id="phone">
+        </div>
+        <div class="wrong-num">
+            <span>您的手机号输入有误</span>
+        </div>
+        <div class="bar" onclick="getUserInfo()">下一步</div>
+    </div>
+    <div class="modal-mobile" id="userInfo">
+        <div class="modal-top">
+                    请确认你的账户信息
+                     <img class="back" src="../../h5/imges/back.png" onclick="back()" alt="">
+                     <img class="close" src="../../h5/imges/close.png" onclick="cancelPay()" alt="">
+        </div>
+        <div class="userInfo">
+            <img id="imgId" alt="">
+            <div class="userInfo-des">
+                <div id="name" class="userInfo-des-nickname"></div>
+                <div id="userId"  class="userInfo-des-id"></div>
+            </div>
+        </div>
+        <div class="bar" onclick="topay()">确认充值</div>
+    </div>
+</body>
+</html>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="./index.js"></script>
+<script src="../js/ua.js"></script>
+<script src="../js/sweetalert.min.js"></script>

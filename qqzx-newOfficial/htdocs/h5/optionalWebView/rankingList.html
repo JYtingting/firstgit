@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,telephone=no">
+  <title>今日爆款</title>
+  <link rel="stylesheet" href="ranking-list.css">
+  <meta content="maximum-dpr=2" name="flexible" />
+  <script src="../js/ua.js"></script>
+  <script src="../js/jquery-1.10.2.js"></script>
+  <script src="../js/util.js"></script>
+</head>
+<body>
+<div class="header"></div>
+<a href="javascript:void(0)"  onclick="seeHistory()"><div class="ranking-his">历史爆款</div></a>
+<div class="main">
+</div>
+</div>
+<script>
+  fnResize()
+  window.onresize = function () {
+    fnResize()
+  }
+  function fnResize () {
+    var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+    if (deviceWidth >= 750) {
+      deviceWidth = 750
+    }
+    if (deviceWidth <= 320) {
+      deviceWidth = 320
+    }
+    document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+  }
+  let day = `${new Date().getFullYear()}`
+  if (new Date().getMonth() < 9) {
+    day += `/0${new Date().getMonth() + 1}`
+  } else {
+    day += `/${new Date().getMonth()}`
+  }
+  if (new Date().getDate() < 10) {
+    day += `/0${new Date().getDate()}/18:30:00`
+  } else {
+    day += `/${new Date().getDate()}/18:30:00`
+  }
+  console.log((new Date(day).valueOf() - new Date().valueOf())/60/1000)
+</script>
+<script type="text/javascript">
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  let baseUrl = ''
+  getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+  let rankingList = ''
+  getUserInfo()
+  getStatusBar()
+  // 获取Android顶部高度
+  function getStatusBar (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getStatusBar', {}, function (response) {
+        const val = response / 100 + 0.25
+        if (browser.versions.android) {
+          $('.ranking-his').css('top', `${val}rem`)
+        }
+      })
+    } else {
+      setTimeout(() => {
+        getStatusBar()
+      }, 50)
+    }
+  }
+  // 获取用户信息
+  function getUserInfo (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        const token = JSON.parse(response).token
+        const level = JSON.parse(response).level
+        $.ajax({
+          type: 'post',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          url: `${baseUrl}/doc/api/common/auth/memberSales/getItemSales.json?token=${token}`,
+          success: (res) => {
+            rankingList = res.data.list
+            for (let i = 0; i < rankingList.length; i++) {
+              if (level >= 10) {
+                $('.main').append(`<div class="item clearfix"><div class="detail clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="img-item"><p class="clearfix"><img class="hidden" src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><img src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /></p></div></a><div class="info-item"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="title one-txt-cut">${rankingList[i].itemRankDTO.name}</div></a><div class="info clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="member">¥${priceFormat(rankingList[i].itemRankDTO.memberPrice)}</div><div class="market">市场价¥${priceFormat(rankingList[i].itemRankDTO.marketPrice)}</div></a><a href="javascript:void(0)" onclick="shareItem(${i})"><div class="share">分享</div></a></div></div></div><div class="ranking clearfix"><div class="today">个人总销量:<span>${rankingList[i].memberSalesDTO.salesNum}</span></div><a href="javascript:void(0)" onclick="loadRanking(${rankingList[i].itemRankDTO.activityId})" class="rank-detail">查看排行＞</a></div></div>`)
+              } else {
+                $('.main').append(`<div class="item clearfix"><div class="detail clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="img-item"><p class="clearfix"><img class="hidden" src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><img src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /></p></div></a><div class="info-item"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="title one-txt-cut">${rankingList[i].itemRankDTO.name}</div></a><div class="info clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="member">¥${priceFormat(rankingList[i].itemRankDTO.marketPrice)}</div><div class="market">市场价¥${priceFormat(rankingList[i].itemRankDTO.showPrice)}</div></a><a href="javascript:void(0)" onclick="shareItem(${i})"><div class="share">分享</div></a></div></div></div><div class="ranking clearfix"><div class="today">个人总销量:<span>${rankingList[i].memberSalesDTO.salesNum}</span></div><a href="javascript:void(0)" onclick="loadRanking(${rankingList[i].itemRankDTO.activityId})" class="rank-detail">查看排行＞</a></div></div>`)
+              }
+            }
+          }
+        })
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo()
+      }, 50)
+    }
+  }
+
+
+
+
+
+
+  // 测试数据
+  // const token = 'c1a0b35ad0854986b2f81b5cf614709'
+  // const level = 10
+  // $.ajax({
+  //   type: 'post',
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   },
+  //   url: `${baseUrl}/doc/api/common/auth/memberSales/getItemSales.json?token=${token}`,
+  //   success: (res) => {
+  //     rankingList = res.data.list
+  //     for (let i = 0; i < rankingList.length; i++) {
+  //       if (level >= 10) {
+  //         $('.main').append(`<div class="item clearfix"><div class="detail clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="img-item"><p class="clearfix"><img class="hidden" src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><img src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /></p></div></a><div class="info-item"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="title one-txt-cut">${rankingList[i].itemRankDTO.name}</div></a><div class="info clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="member">¥${priceFormat(rankingList[i].itemRankDTO.memberPrice)}</div><div class="market">市场价¥${priceFormat(rankingList[i].itemRankDTO.marketPrice)}</div></a><a href="javascript:void(0)" onclick="shareItem(${i})"><div class="share">分享</div></a></div></div></div><div class="ranking clearfix"><div class="today">个人总销量:<span>${rankingList[i].memberSalesDTO.salesNum}</span></div><a href="javascript:void(0)" onclick="loadRanking(${rankingList[i].itemRankDTO.activityId})" class="rank-detail">查看排行＞</a></div></div>`)
+  //       } else {
+  //         $('.main').append(`<div class="item clearfix"><div class="detail clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="img-item"><p class="clearfix"><img class="hidden" src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /><img src="${rankingList[i].itemRankDTO.picUrls[0]}_400w.jpg" alt="" /></p></div></a><div class="info-item"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="title one-txt-cut">${rankingList[i].itemRankDTO.name}</div></a><div class="info clearfix"><a href="javascript:void(0)" onclick="loadMore(${rankingList[i].itemRankDTO.itemId})" ><div class="member">¥${priceFormat(rankingList[i].itemRankDTO.marketPrice)}</div><div class="market">市场价¥${priceFormat(rankingList[i].itemRankDTO.showPrice)}</div></a><a href="javascript:void(0)" onclick="shareItem(${i})"><div class="share">分享</div></a></div></div></div><div class="ranking clearfix"><div class="today">个人总销量:<span>${rankingList[i].memberSalesDTO.salesNum}</span></div><a href="javascript:void(0)" onclick="loadRanking(${rankingList[i].itemRankDTO.activityId})" class="rank-detail">查看排行＞</a></div></div>`)
+  //       }
+  //     }
+  //   }
+  // })
+
+
+
+
+
+
+
+
+  function loadMore(id) {
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUrlTo', {'page': `wg://push.chuang.co?page=prodDetail&prodId=${id}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        loadMore(id)
+      }, 50)
+    }
+  }
+  function loadRanking(id) {
+    getQueryString('dev') ? window.location.href = `./rankingDetail.html?activityId=${id}&fullscreen=1&dev=1` : window.location.href = `./rankingDetail.html?activityId=${id}&fullscreen=1`
+  }
+  function shareItem(ind) {
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getShareInfo', {'itemId': `${rankingList[ind].itemRankDTO.itemId}`, 'title': `${rankingList[ind].itemRankDTO.name}`, 'desc': `${rankingList[ind].itemRankDTO.name}`, 'img': `${rankingList[ind].itemRankDTO.picUrls[0]}`, 'price': `${rankingList[ind].itemRankDTO.marketPrice}`}, function (response) {
+      })
+    } else {
+      setTimeout(() => {
+        shareItem(ind)
+      }, 50)
+    }
+  }
+  function seeHistory () {
+    getQueryString('dev') ? window.location.href = `./rankingHistory.html?dev=1` : window.location.href = `./rankingHistory.html`
+  }
+</script>
+</body>
+</html>

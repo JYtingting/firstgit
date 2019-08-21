@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,user-scalable=0,telephone=no" name="viewport">
+    <link href="css/detail.css" rel="stylesheet">
+    <script src="../../../newOfficial/js/jquery.js"></script>
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        h5, h6 {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-user-select: none;
+            -moz-user-focus: ignore;
+            -moz-user-select: none;
+        }
+    </style>
+    <script>
+        document.title = '\u200E';
+        fnResize();
+        window.onresize = function () {
+            fnResize()
+        };
+
+        function fnResize() {
+            var deviceWidth = document.documentElement.clientWidth || window.innerWidth;
+            if (deviceWidth >= 750) {
+                deviceWidth = 750
+            }
+            if (deviceWidth <= 320) {
+                deviceWidth = 320
+            }
+            document.documentElement.style.fontSize = (deviceWidth / 10) + 'px'
+        }
+    </script>
+</head>
+<body>
+<div class="detialTop"></div>
+<div class="detailInfo">
+    <div class="goodsInfo"></div>
+    <div class="spacer"></div>
+</div>
+<!--<div class="commentMinModule">-->
+    <!--<div class="top">-->
+        <!--<ul>-->
+            <!--<li class="iconfont like">&#xe63b;</li>-->
+            <!--<li class="iconfont like">&#xe63b;</li>-->
+            <!--<li class="iconfont like">&#xe63b;</li>-->
+            <!--<li class="iconfont like">&#xe63b;</li>-->
+            <!--<li class="iconfont like halfLike">&#xe63b;</li>-->
+        <!--</ul>-->
+        <!--<div class="score">5分</div>-->
+        <!--<div class="scoreBtn"><i class="iconfont icon-pingfen">&#xe678;</i> 评分</div>-->
+    <!--</div>-->
+    <!--<div class="spacer"></div>-->
+<!--</div>-->
+<div class="classInfo">
+    <h5><span>课程目录</span><i>共3节课</i></h5>
+    <ul>
+    </ul>
+</div>
+<div class="goodsDetailInfo">
+    <div class="container"></div>
+</div>
+<!--<div class="comment">-->
+<!--<div class="moduleTitle">-->
+    <!--<h4>精选留言</h4>-->
+    <!--<div class="editComment">-->
+        <!--<i class="iconfont icon-xieliuyan">&#xe678;</i><span>写留言</span>-->
+    <!--</div>-->
+<!--</div>-->
+    <!--<div class="noCommentList">-->
+        <!--<img src="https://img.mall.xc2018.com.cn/mall/upload/20190618/113313_18_dhu7.png" alt="">-->
+        <!--<p>暂无留言</p>-->
+    <!--</div>-->
+<!--</div>-->
+<div id="share">
+    <img src="https://img.mall.xc2018.com.cn/mall/upload/20190419/171430_45_y95d.png" alt="">
+</div>
+</body>
+<script src="../js/util.js"></script>
+<script src="js/detail-info.js"></script>
+
+</html>

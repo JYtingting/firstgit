@@ -1,0 +1,559 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 1265285 */
+    src: url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.eot');
+    src: url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1265285_7tw4nlrrab5.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.top{
+    width: 9.36rem;
+    margin: 0 auto;
+    height: 1.4933rem;
+    display: flex;
+    -webkit-box-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchInput{
+    width: 8.32rem;
+    height: 0.85rem;
+    line-height: 0.8rem;
+    display: flex;
+    font-size: 0.373333rem;
+    background: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.16rem;
+}
+.searchInput form{
+    display: flex;
+}
+.searchInput input{
+    -webkit-box-flex: 1;
+    display: block;
+    border: none;
+    background: rgba(0, 0, 0, 0);
+    padding-right: 1.066667rem;
+    font-size: 0.373333rem;
+    color: transparent;
+    text-shadow: 0 0 0 #363636;
+
+}
+.searchInput input:focus{
+    outline: none;
+}
+.searchInput form i{
+    font-size: 0.6rem;
+    color: #ABABAB;
+    width: 0.92rem;
+    height: 0.853333rem;
+    text-align: center;
+    line-height: 0.906667rem;
+}
+/*.top .message{*/
+    /*width: 0.586667rem;*/
+    /*height: 0.586667rem;*/
+    /*position: relative;*/
+/*}*/
+#message{
+    position: relative;
+    font-size: 0.7rem;
+    line-height: 0.586667rem;
+    color: #656565;
+}
+
+
+.slide{
+    width: 9.36rem;
+    height: 3.626667rem;
+    margin: 0 auto 0.44rem;
+    border-radius: 0.16rem;
+    overflow: hidden;
+    background-image: url("https://img.mall.xc2018.com.cn/mall/upload/20190626/163108_4_42w5.jpeg");
+    background-size: cover;
+}
+.headerline{
+    width: 100%;
+    height: 1.493333rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.headerline .line{
+    width: 0.16rem;
+    height: 0.44rem;
+    background: #ecc184;
+    border-radius: 0.026667rem;
+    margin-left: 0.32rem;
+}
+.headerline  .title{
+    font-size: 0.48rem;
+    color: #363636;
+    line-height: 0.666667rem;
+    margin-left: 0.16rem;
+    font-weight: bold;
+}
+.bottom-line{
+    width: 9.146667rem;
+    height: 0.013333rem;
+    background: rgba(0, 0, 0, 0);
+    margin: 0 auto;
+    border-bottom: 1px solid #E5E5E5;
+}
+.videoHot ul{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 9.146667rem;
+    margin: 0.426667rem auto 0;
+    flex-wrap: wrap;
+    padding: 0;
+}
+.videoHot ul li{
+    width: 4.32rem;
+    background: white;
+    border-radius: 0.08rem;
+    margin-bottom: 0.546667rem;
+    list-style: none;
+}
+.videoHot ul li .cover {
+    position: relative;
+    width: 4.32rem;
+    height: 2.453333rem;
+    border-radius: 0.106667rem;
+    overflow: hidden;
+}
+.cover-img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.videoHot ul li .videoInfo{
+    overflow: hidden;
+}
+.videoHot ul li .videoInfo h4{
+    width: 4.053333rem;
+    height: 0.533333rem;
+    font-size: 0.373333rem;
+    line-height: 0.533333rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0.253333rem auto 0;
+    font-weight: 500;
+    color: #363636;
+}
+.videoHot ul li .videoInfo .desc{
+    width: 4.053333rem;
+    height: 0.44rem;
+    font-size: 0.32rem;
+    line-height: 0.44rem;
+    margin: 0.133333rem 0 0 0.24rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    color: #777777;
+}
+.videoHot ul li .videoInfo .price{
+    width: 4.053333rem;
+    height: 0.44rem;
+    font-size: 0.32rem;
+    line-height: 0.44rem;
+    margin: 0.133333rem 0 0 0.24rem;
+    font-weight: 500;
+    color: #ff4400;
+}
+.spacer{
+    width: 100%;
+    height: 0.266667rem;
+    background: #f5f5f5;
+}
+.headerline .more{
+    font-size: 0.373333rem;
+    color: #ecc184;
+    line-height: 0.533333rem;
+    text-align: right;
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    margin-right: 0.426667rem;
+}
+.more a:link,.more a:visited{
+    color: #ecc184;
+}
+
+.vipul {
+    width: 9.146667rem;
+    margin: 0.413333rem auto 0;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0;
+}
+.vipul li{
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 1.866667rem;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 0.266667rem;
+    background: #fff;
+}
+.vipul li .cover{
+    position: relative;
+    width: 3.066667rem;
+    height: 1.866667rem;
+    margin-right: 0.266667rem;
+    border-radius: 0.08rem;
+    overflow: hidden;
+}
+.vipul li .classInfo{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 1.866667rem;
+}
+.vipul li .classInfo h4{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+    height: 0.533333rem;
+    font-size: 0.373333rem;
+    font-weight: 500;
+    color: #363636;
+    line-height: 0.533333rem;
+}
+.vipul li .classInfo p{
+    margin-top: 0.053333rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 0.44rem;
+    font-size: 0.32rem;
+    font-weight: 400;
+    color: #656565;
+    line-height: 0.44rem;
+}
+.vipul li .classInfo .desc{
+    margin-top: 0.32rem;
+    font-size: 0.32rem;
+    font-weight: 400;
+    color: #777777;
+    line-height: 0.44rem;
+}
+.vipul li .classInfo .desc1{
+    width: 60%;
+    font-size: 0.32rem;
+    line-height: 0.453333rem;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.vipul li .classInfo .desc2{
+    float: right;
+    width: 40%;
+    font-size: 0.32rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+    height: 0.44rem;
+    font-weight: 500;
+    color: #ff4400;
+    line-height: 0.44rem;
+}
+.recommend{
+    width: 100%;
+    margin-top: 0.413333rem;
+    padding: 0;
+    margin-bottom: 0;
+}
+.recommend li{
+    width: 9.146667rem;
+    margin: 0 auto 0.293333rem;
+    background: #fff;
+}
+.graphic{
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.info{
+    width: 9.146667rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 0.32rem;
+}
+.info h5{
+    margin-top: 0;
+    line-height: 0.533333rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.133333rem;
+    height: 0.533333rem;
+    font-size: 0.373333rem;
+    font-weight: 500;
+    color: #363636;
+}
+.info p{
+    margin-top: 0;
+    max-height: 0.88rem;
+    line-height: 0.44rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-bottom: 0.213333rem;
+    font-size: 0.32rem;
+    font-weight: 400;
+    color: #777777;
+}
+.recommend li .graphic .coverList .oneover{
+    width: 100%;
+    height: 4.133333rem;
+    background: #f9f9f9;
+    border-radius: 0.08rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.453333rem;
+}
+.Ebook{
+    width: 9.146667rem;
+    margin: 0 auto;
+    height: 5.6rem;
+}
+.Ebook ul{
+    background-color: #fff;
+    border-radius: 0.08rem;
+    padding: 0.4rem 0 0;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.Ebook ul li{
+    width: 2.2rem;
+    margin-bottom: 0.426667rem;
+}
+.Ebook ul li .EbookSty{
+    width: 2.2rem;
+}
+.EbookSty img{
+    width: 100%;
+    height: 2.906667rem;
+    border-radius: 0.08rem;
+}
+.EbookSty p{
+    margin-top: 0.186667rem;
+    margin-bottom: 0;
+    width: 100%;
+    height: 1.066667rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    font-size: 0.373333rem;
+    font-weight: 500;
+    color: #363636;
+    line-height: 0.533333rem;
+    text-align: center;
+}
+.EbookSty span{
+    display: inline-block;
+    margin-top: 0.266667rem;
+    font-size: 0.32rem;
+    width: 100%;
+    font-weight: 500;
+    color: #ff4400;
+}
+.nav .navFirst{
+    height: 1.253333rem;
+    background: #ffffff;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid #E5E5E5;
+    margin: 0;
+}
+.fixednav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+.navbottom{
+    margin-top: 1.253333rem;;
+}
+.nav .navFirst li{
+    height: 1.253333rem;
+    white-space: nowrap;
+    margin: 0 0.133333rem;
+}
+.nav .navFirst li{
+    height: 1.253333rem;
+    white-space: nowrap;
+    margin: 0 0.133333rem;
+}
+.nav .navFirst li span{
+    display: block;
+    padding: 0 0.133333rem;
+    font-size: 0.426667rem;
+    font-weight: 400;
+    color: #363636;
+    line-height: 1.146667rem;
+}
+.recommended ul{
+    width: 100%;
+    background: #fff;
+    padding-bottom: 0.266667rem;
+}
+.recommended ul li{
+    width: 9.36rem;
+    margin: 0 auto;
+    border-top: 1px solid #e5e5e5;
+}
+.recommended ul li .videoClass{
+    width: 9.36rem;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.recommended ul li .videoClass .info{
+    max-height: 2.16rem;
+    margin-top: 0.4rem;
+    padding: 0;
+}
+.recommended ul li .videoClass .info h5{
+    width: 9.36rem;
+    height: 0.6rem;
+    font-size: 0.426667rem;
+    color: #363636;
+    line-height: 0.6rem;
+    margin-bottom: 0.133333rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.recommended ul li .videoClass .info p{
+    width: 9.36rem;
+    max-height: 0.533333rem;
+    font-size: 0.373333rem;
+    color: #777777;
+    line-height: 0.533333rem;
+    margin-bottom: 0.213333rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.recommended ul li .videoClass .info .priceinfo{
+    font-size: 0.32rem;
+    line-height: 0.44rem;
+    margin-bottom: 0.24rem;
+
+}
+.recommended ul li .videoClass .info .priceinfo span{
+    color: #ff4400;
+    margin-right: 0.266667rem;
+}
+.nav .navFirst li.active span:after {
+    display: block;
+    content: '';
+    /*width: 0.7rem;*/
+    height: 0.106667rem;
+    background: #ecc184;
+    border-radius: 0.053333rem;
+    color: #ECC184;
+    margin: 0 auto;
+}
+.nav .navFirst li.active span {
+    color: #ECC184;
+}
+
+.recommended ul li .videoClass .videoCover{
+    width: 100%;
+    height: 5.466667rem;
+    background: #d8d8d8;
+    border-radius: 0.08rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.533333rem;
+}
+.recommended ul li .videoClass .videoCover .icon-play{
+    display: flex;
+    width: 1.173333rem;
+    height: 1.173333rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 1.173333rem;
+    line-height: 1.173333rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.56rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+}
+.videoClass .videoCover .people{
+    padding: 0 0.266667rem;
+    height: 0.64rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 0.32rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    right: 0.266667rem;
+    bottom: 0.133333rem;
+    width: 3rem;
+}
+
+.videoClass .videoCover .people span{
+    font-weight: 400;
+    color: white;
+    line-height: 0.64rem;
+}
+.learning{
+    font-size: 0.4rem;
+
+}

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>素材圈</title>
+  <script src="../js/flexible.js"></script>
+  <link rel="stylesheet" href="material-circle.css">
+  <link rel="stylesheet" href="./../css/video-js.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/swiper.min.css" />
+  <script src="../js/jquery-1.10.2.js"></script>
+  <script src="./../js/video.min.js"></script>
+  <script src="../js/moment.min.js"></script>
+  <script src="../js/cn.js"></script>
+  <script src="../js/util.js"></script>
+  <script src="../js/swiper.min.js"></script>
+</head>
+<body>
+<div class="loading">
+  <img src="http://www.fasebj.org/ux3/widgets/publication-content/images/spinner.gif" alt="" />
+</div>
+<div class="top_menu">
+  <div class="common li-active">今日必推<div class="bottom-line"></div></div>
+  <div class="common">招商素材<div class="bottom-line"></div></div>
+  <div class="common">商品素材<div class="bottom-line"></div></div>
+  <div class="common">官方动态<div class="bottom-line"></div></div>
+</div>
+<div class="ul">
+  <div class="bottom_content" style="left: 0;">
+    <div class="body_1"></div>
+    <div class="body_1"></div>
+    <div class="body_1"></div>
+    <div class="body_1"></div>
+  </div>
+</div>
+<div class="big_img">
+  <div class="swiper-container2">
+    <div class="swiper-wrapper"></div>
+  </div>
+</div>
+<script type="text/javascript">
+  let page = 1
+  function connectWebViewJavascriptBridge (callback) {
+    if (window.WebViewJavascriptBridge) {
+      callback(window.WebViewJavascriptBridge)
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function () {
+        callback(window.WebViewJavascriptBridge)
+      }, false)
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback)
+      }
+      window.WVJBCallbacks = [callback]
+      var WVJBIframe = document.createElement('iframe')
+      WVJBIframe.style.display = 'none'
+      WVJBIframe.src = 'https://__bridge_loaded__'
+      document.documentElement.appendChild(WVJBIframe)
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+  }
+  // 注册回调函数，第一次连接时调用 初始化函数
+  // bridge.init 只有android需要调用初始化，可以使用Object.keys(bridge) 打开查看对象，ios没有init方法
+  connectWebViewJavascriptBridge(function (bridge) {
+    try {
+      bridge.init(function (message, responseCallback) {
+        console.log('JS got a message', message)
+        var data = {
+          'Javascript Responds': 'CMYH!'
+        }
+        console.log('JS responding with', data)
+        responseCallback(data)
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  let allList = []
+  // const baseUrl = 'http://qqzx.xc2018.com.cn'
+  let baseUrl = ''
+  getQueryString('dev') ? baseUrl = 'http://dev.wegoomall.cn' : baseUrl = 'http://api.wchoosemall.com'
+  // 绑定token
+  let token = ''
+  setTimeout(() => {
+    getUserInfo()
+  }, 300)
+
+  // 默认信息
+  let firInd = 1
+  let secInd = 1
+  let thiInd = 1
+  let fouInd = 1
+  let state = 0
+  let loading = false
+  function getUserInfo (){
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getUserInfo', {}, function (response) {
+        token = JSON.parse(response).token
+        // 默认信息
+        addData(0, 1, 1, token)
+
+        // tab切换功能（滑动）
+        $('.bottom_content')[0].style.left = "0%"
+        var startX = '',disX =''
+        $('.top_menu').on('click','.common',function(){
+          page = 1
+          window.removeEventListener('scroll', this.handleScroll)
+          setTimeout(() => {
+            window.addEventListener('scroll', this.handleScroll)
+          }, 50)
+          var index = $(this).index()
+          page = 1
+          if (index === 1) {
+            $('.body_1').eq(0).html('')
+            $('.body_1').eq(2).html('')
+            $('.body_1').eq(3).html('')
+            firInd = 1
+            state = 1
+            addData(1, 3, firInd, token)
+          } else if (index === 2) {
+            $('.body_1').eq(0).html('')
+            $('.body_1').eq(1).html('')
+            $('.body_1').eq(3).html('')
+            secInd = 1
+            state = 2
+            addData(2, 2, secInd, token)
+          } else if (index === 3) {
+            $('.body_1').eq(0).html('')
+            $('.body_1').eq(1).html('')
+            $('.body_1').eq(2).html('')
+            thiInd = 1
+            state = 3
+            addData(3, 0, thiInd, token)
+          } else {
+            $('.body_1').eq(1).html('')
+            $('.body_1').eq(2).html('')
+            $('.body_1').eq(3).html('')
+            fouInd = 1
+            state = 0
+            addData(0 ,1, fouInd, token)
+          }
+          $('.bottom_content').css('left','-' + index * 100 + '%')
+          $('.top_menu .common').eq(index).addClass('li-active').siblings().removeClass('li-active')
+        })
+        $('.bottom_content').on('touchstart','.body_1',function(e){
+          startX = e.originalEvent.changedTouches[0].clientX
+        })
+        $('.bottom_content').on('touchmove','.body_1',function(e){
+          e.stopPropagation()
+        })
+        $('.bottom_content').on('touchend','.body_1',function(e){
+          disX = e.originalEvent.changedTouches[0].clientX - startX
+          var leftNum = parseInt($('.bottom_content')[0].style.left)
+          let order
+          if(disX > 0 && disX > 100) {
+            if(leftNum <= -100) {
+              $('.bottom_content')[0].style.left = leftNum + 100 + "%"
+              order = -parseInt($('.bottom_content')[0].style.left)/100
+              $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+            }
+          } else if(disX < 0 && disX < -100) {
+            if ((-parseInt($('.bottom_content')[0].style.left))/100 === 2) {
+              return
+            }
+            if(leftNum >= -100) {
+              $('.bottom_content')[0].style.left = leftNum - 100 + "%"
+              order = (-parseInt($('.bottom_content')[0].style.left))/100
+              $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+            }
+          }
+          firInd = 1
+          secInd = 1
+          thiInd = 1
+          fouInd = 1
+          if (disX > 0 && disX > 100 || disX < 0 && disX < -100) {
+            page = 1
+            if (order === 1) {
+              $('.body_1').eq(0).html('')
+              $('.body_1').eq(2).html('')
+              $('.body_1').eq(3).html('')
+              secInd = 1
+              state = 1
+              addData(1, 3, secInd, token)
+            } else if (order === 2) {
+              $('.body_1').eq(0).html('')
+              $('.body_1').eq(1).html('')
+              $('.body_1').eq(3).html('')
+              thiInd = 1
+              state = 2
+              addData(2, 2, thiInd, token)
+            } else if (order === 3) {
+              $('.body_1').eq(0).html('')
+              $('.body_1').eq(1).html('')
+              $('.body_1').eq(2).html('')
+              fouInd = 1
+              state = 3
+              addData(3, 0, fouInd, token)
+            } else {
+              $('.body_1').eq(1).html('')
+              $('.body_1').eq(2).html('')
+              $('.body_1').eq(3).html('')
+              firInd = 1
+              state = 0
+              addData(0, 1, firInd, token)
+            }
+          }
+        })
+      })
+    } else {
+      setTimeout(() => {
+        getUserInfo()
+      }, 50)
+    }
+  }
+
+
+
+
+  // 调试数据
+  // token = '0e99409ecb5644ddac37cda90615042'
+  // addData(0, 1, 1, token)
+  // // tab切换功能（滑动）
+  // $('.bottom_content')[0].style.left = "0%"
+  // var startX = '',disX =''
+  // $('.top_menu').on('click','.common',function(){
+  //   page = 1
+  //   window.removeEventListener('scroll', this.handleScroll)
+  //   setTimeout(() => {
+  //     window.addEventListener('scroll', this.handleScroll)
+  //   }, 50)
+  //   var index = $(this).index()
+  //   console.log(22, index)
+  //   if (index === 1) {
+  //     $('.body_1').eq(0).html('')
+  //     $('.body_1').eq(2).html('')
+  //     $('.body_1').eq(3).html('')
+  //     secInd = 1
+  //     state = 1
+  //     addData(1, 3, secInd, token)
+  //   } else if (index === 2) {
+  //     $('.body_1').eq(0).html('')
+  //     $('.body_1').eq(1).html('')
+  //     $('.body_1').eq(3).html('')
+  //     thiInd = 1
+  //     state = 2
+  //     addData(2, 2, thiInd, token)
+  //   } else if (index === 3) {
+  //     $('.body_1').eq(0).html('')
+  //     $('.body_1').eq(1).html('')
+  //     $('.body_1').eq(2).html('')
+  //     thiInd = 1
+  //     state = 3
+  //     addData(3, 0, thiInd, token)
+  //   } else {
+  //     $('.body_1').eq(1).html('')
+  //     $('.body_1').eq(2).html('')
+  //     $('.body_1').eq(3).html('')
+  //     firInd = 1
+  //     state = 0
+  //     addData(0, 1, firInd, token)
+  //   }
+  //   $('.bottom_content').css('left','-' + index * 100 + '%')
+  //   $('.top_menu .common').eq(index).addClass('li-active').siblings().removeClass('li-active')
+  // })
+  // $('.bottom_content').on('touchstart','.body_1',function(e){
+  //   startX = e.originalEvent.changedTouches[0].clientX
+  // })
+  // $('.bottom_content').on('touchmove','.body_1',function(e){
+  //   e.stopPropagation()
+  // })
+  // $('.bottom_content').on('touchend','.body_1',function(e){
+  //   disX = e.originalEvent.changedTouches[0].clientX - startX
+  //   var leftNum = parseInt($('.bottom_content')[0].style.left)
+  //   let order
+  //   if(disX > 0 && disX > 100) {
+  //     if(leftNum <= -100) {
+  //       $('.bottom_content')[0].style.left = leftNum + 100 + "%"
+  //       order = -parseInt($('.bottom_content')[0].style.left)/100
+  //       $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+  //     }
+  //   } else if(disX < 0 && disX < -100) {
+  //     if ((-parseInt($('.bottom_content')[0].style.left))/100 === 2) {
+  //       return
+  //     }
+  //     if(leftNum >= -100) {
+  //       $('.bottom_content')[0].style.left = leftNum - 100 + "%"
+  //       order = (-parseInt($('.bottom_content')[0].style.left))/100
+  //       $('.top_menu .common').eq(order).addClass('li-active').siblings().removeClass('li-active')
+  //     }
+  //   }
+  //   firInd = 1
+  //   secInd = 1
+  //   thiInd = 1
+  //   fouInd = 1
+  //   if (disX > 0 && disX > 100 || disX < 0 && disX < -100) {
+  //     if (order === 1) {
+  //       $('.body_1').eq(0).html('')
+  //       $('.body_1').eq(2).html('')
+  //       $('.body_1').eq(3).html('')
+  //       secInd = 1
+  //       state = 1
+  //       addData(1, 3, secInd, token)
+  //     } else if (order === 2) {
+  //       $('.body_1').eq(0).html('')
+  //       $('.body_1').eq(1).html('')
+  //       $('.body_1').eq(3).html('')
+  //       thiInd = 1
+  //       state = 2
+  //       addData(2, 2, thiInd, token)
+  //     } else if (order === 3) {
+  //       $('.body_1').eq(0).html('')
+  //       $('.body_1').eq(1).html('')
+  //       $('.body_1').eq(2).html('')
+  //       fouInd = 1
+  //       state = 3
+  //       addData(3, 0, thiInd, token)
+  //     } else {
+  //       $('.body_1').eq(1).html('')
+  //       $('.body_1').eq(2).html('')
+  //       $('.body_1').eq(3).html('')
+  //       firInd = 1
+  //       state = 4
+  //       addData(0, 1, fouInd, token)
+  //     }
+  //   }
+  // })
+
+
+
+
+
+  // 查看全文
+  function seeMore(index) {
+    $('.content').eq(index).find('.open').hide()
+    $('.content').eq(index).find('.detail').removeClass('txt-cut')
+  }
+  // 点赞功能
+  function zanOperate(index, num, id) {
+    const att = $('.content').eq(index).find('.operate-item').eq(0).find('.icon')
+    const ht = $('.content').eq(index).find('.operate-item').eq(0).find('.value')
+    att.attr('src', 'http://file.wchoosemall.com/platform/manager/pic/zan-selected.png')
+    const data = {
+      id
+    }
+    ht.html(num + 1)
+    $.ajax({
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/doc/api/common/auth/materialCircle/addFavoriteNum.json?token=${token}`,
+      data: `data=${JSON.stringify(data)}`,
+      success: (res) => {
+      }
+    })
+  }
+
+  /*调起大图 S*/
+  var mySwiper = new Swiper('.swiper-container2', {
+    loop: false,
+    pagination: '.swiper-pagination2',
+  })
+  $(".body_1").on("click", ".m-demo",
+    function() {
+      var imgBox = $(this).parents(".img-list").find(".img-big");
+      let i = 0
+      for (let k = 0; k < $(imgBox).length; k++) {
+        if ($(imgBox[k]).attr('src') === $(this).find('.img-big').attr('src')) {
+          i = k
+        }
+      }
+      $(".big_img .swiper-wrapper").html("")
+      for(var j = 0 ,c = imgBox.length; j < c ;j++){
+        $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+      }
+      mySwiper.updateSlidesSize();
+      mySwiper.updatePagination();
+      $(".big_img").css({
+        "z-index": 1001,
+        "opacity": "1"
+      });
+      mySwiper.slideTo(i, 0, false);
+      return false;
+    });
+
+  $(".big_img").on("click",
+    function() {
+      $(this).css({
+        "z-index": "-1",
+        "opacity": "0"
+      })
+    })
+
+  // 下载功能
+  function downloadOperate(index, num, id) {
+    const ht = $('.content').eq(index).find('.operate-item').eq(1).find('.value')
+    if (ht.html() === JSON.stringify(num) || ht.html() === '下载') {
+      ht.html(num + 1)
+    }
+    const data = {
+      id
+    }
+    $.ajax({
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/doc/api/common/auth/materialCircle/addDownloadNum.json?token=${token}`,
+      data: `data=${JSON.stringify(data)}`,
+      success: (res) => {
+      }
+    })
+    allList[index].videoUrl ? getMaterialPic([allList[index].videoPicUrl], allList[index].recommendedReason, [allList[index].videoUrl]) : getMaterialPic(allList[index].picUrls, allList[index].recommendedReason)
+  }
+  // 数据拼接
+  function addData (inde, index, page, token) {
+    const data = {
+      type: index,
+      page
+    }
+    $.ajax({
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      url: `${baseUrl}/doc/api/common/auth/materialCircle/findMaterialCircleNew.json?token=${token}`,
+      data: `data=${JSON.stringify(data)}`,
+      success: (res) => {
+        setTimeout(() => {
+          $('.loading').hide()
+        }, 500)
+        console.log(res)
+        allList = res.data.list
+        const data = res.data.list
+        splicingData(data, inde)
+      }
+    })
+  }
+
+  // 添加数据
+  function splicingData (data, inde) {
+    for (let i = 0; i < data.length; i++) {
+      let fir = `<div class="content"><div class="header-item clearfix"><img class="header-img" src="${data[i].avatar}" alt="" /><div class="name-item"><div class="name">${data[i].nickName}</div><div class="time">${moment(data[i].createTime).from(data[i].currentTime)}发布</div></div></div><div class="art"><div class="content-item"><div class="content-title clearfix"><div class="content-tag">${data[i].customLabel}</div><div class="title one-txt-cut">${data[i].title}</div></div><div class="detail txt-cut">${data[i].recommendedReason}</div>`
+      if (data[i].recommendedReason.length >= 125) {
+        fir += `<div class="open"><a href="javascript:void(0)" onclick="seeMore(${i})">全文</a></div>`
+      }
+      fir += `</div></div><div class="img-list"><div class="image clearfix">`
+      let sec = ``
+      if (data[i].videoUrl) {
+        sec += `<video id="video${i}" class="video-js" controls preload="auto" width="960" src="${data[i].videoUrl}" height="400" poster="${data[i].videoPicUrl}" data-setup="{}"></video>`
+      } else {
+        for (let j = 0; j < data[i].picUrls.length; j++) {
+          sec += `<div class="m-demo"><p><img class="img-item hidden" src="${data[i].picUrls[j]}_400w.jpg" /><img class="img-item img-big" src="${data[i].picUrls[j]}_400w.jpg" /></p></div>`
+        }
+      }
+      const thi = `</div></div><div class="operate clearfix"><a href="javascript:void(0)" onclick="zanOperate(${i}, ${data[i].favoriteNum}, ${data[i].id})"><div class="operate-item clearfix"><img class="icon zan" src="http://file.wchoosemall.com/platform/manager/pic/zan.png" />`
+      let zan = ``
+      data[i].favoriteNum === 0 ? zan += `<div class="value">点赞</div>` : zan += `<div class="value">${data[i].favoriteNum}</div>`
+      let down = `</div></a><a href="javascript:void(0)" onclick="downloadOperate(${i}, ${data[i].downloadNum}, ${data[i].id})"><div class="operate-item clearfix"><img class="icon" src="http://file.wchoosemall.com/platform/manager/pic/download.png" />`
+      data[i].downloadNum === 0 ? down += `<div class="value">下载</div>` : down += `<div class="value">${data[i].downloadNum}</div>`
+      const last = `</div></a></div></div>`
+      $('.body_1').eq(inde).append(fir + sec + thi + zan + down + last)
+    }
+    loading = false
+  }
+
+  window.addEventListener('scroll', handleScroll)
+  // 下拉
+  function handleScroll () {
+    if ($('.body_1').eq(state).html() === '') {
+      return
+    }
+    // 变量scrollTop是滚动条滚动时，距离顶部的距离
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    // 变量windowHeight是可视区的高度
+    const windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+    // 变量scrollHeight是滚动条的总高度
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+    // 滚动条到底部的条件
+    if (scrollTop + windowHeight === scrollHeight) {
+      if (loading) {
+        return
+      }
+      $('.loading').show()
+      loading = true
+      let type = 1
+      page++
+      switch (state) {
+        case 0:
+          type = 1
+          break;
+        case 1:
+          type = 3
+          break;
+        case 2:
+          type = 2
+          break;
+        case 3:
+          type = 0
+          break;
+      }
+      addData(state, type, page, token)
+    }
+  }
+
+  // app js bridge
+  function getMaterialPic (picUrls, content, videoUrl) {
+    if (window.WebViewJavascriptBridge) {
+      window.WebViewJavascriptBridge.callHandler('getMaterialPic', {picUrls, content, videoUrl}, function (response) {
+        console.log(1, response)
+      })
+    } else {
+      setTimeout(() => {
+        getMaterialPic(picUrls, content, videoUrl)
+      }, 50)
+    }
+  }
+
+</script>
+</body>
+</html>

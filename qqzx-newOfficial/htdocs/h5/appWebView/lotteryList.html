@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>大转盘抽奖</title>
+  <link rel="stylesheet" href="lottery-list.css">
+  <script>
+    fnResize()
+    window.onresize = function () {
+      fnResize()
+    }
+    function fnResize () {
+      var deviceWidth = document.documentElement.clientWidth || window.innerWidth
+      if (deviceWidth >= 750) {
+        deviceWidth = 750
+      }
+      if (deviceWidth <= 320) {
+        deviceWidth = 320
+      }
+      document.documentElement.style.fontSize = (deviceWidth / 7.5) + 'px'
+    }
+  </script>
+</head>
+<body>
+<div class="item-list">
+  <div class="item clearfix">
+    <div class="ope-item">
+      <div class="name one-txt-cut">5月21日大转盘抽奖</div>
+      <div class="limit">有效期至 2019-5-22</div>
+    </div>
+    <div class="share-btn">去分享</div>
+  </div>
+</div>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/moment.min.js"></script>
+</body>
+</html>
